@@ -1,0 +1,36 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://atos.com/lawws/webservice/xml/remitosagrupado"
+           targetNamespace="http://atos.com/lawws/webservice/xml/remitosagrupado"
+           elementFormDefault="qualified">
+
+    <xs:element name="remitosAgrupadoRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idProveedor" type="xs:string"/>
+                <xs:element name="fecha" type="xs:date"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="remitosAgrupadoResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="remitosAgrupados" type="tns:remitoAgrupado" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="remitoAgrupado">
+        <xs:sequence>
+            <xs:element name="pieza" type="xs:string"/>
+            <xs:element name="proveedor" type="xs:string"/>
+            <xs:element name="fecha" type="xs:date"/>
+            <xs:element name="cantidad" type="xs:int"/>
+            <xs:element name="codRemito" type="xs:string"/>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="remDefPtoVenta" type="xs:string"/>
+            <xs:element name="remDefNumero" type="xs:string"/>
+            <xs:element name="remDefFecha" type="xs:date"/>
+            <xs:element name="remDefFechaValidacion" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

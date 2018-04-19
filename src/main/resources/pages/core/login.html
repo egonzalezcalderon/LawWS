@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{structure/lawwsloginpage}">
+<head>
+    <title>LawWS - Login</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4">
+            <br />
+            <div class="panel panel-default">
+                
+                <div class="panel-heading">
+                    <h1>Login</h1>
+                </div>
+                <div class="panel-body">
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">
+                            Invalid username and password.
+                        </div>
+                    </div>
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-info">
+                            You have been logged out.
+                        </div>
+                    </div>
+                    <form th:action="@{/login}" method="post">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user" style="width: auto"></i>
+                                </span>
+                                <input type="text" name="username" id="username" class="form-control"
+                                        placeholder="Username" required="true" autofocus="true"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-lock" style="width: auto"></i>
+                                </span>
+                                <input type="password" name="password" id="password" class="form-control"
+                                        placeholder="Password" required="true"/>
+                            </div>
+                        </div>
+                        <button class="btn btn-default" style="width: 100%" type="submit">
+                                INGRESAR <i class="glyphicon glyphicon-log-in"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://atos.com/lawws/webservice/xml/actualizacionremitosdefinitivos"
+           targetNamespace="http://atos.com/lawws/webservice/xml/actualizacionremitosdefinitivos"
+           elementFormDefault="qualified">
+
+    <xs:element name="actualizacionRemitosDefinitivosRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="remitosDefinitivos" type="tns:remitoDefinitivo" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="actualizacionRemitosDefinitivosResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="operationResult" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="remitoDefinitivo">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="proveedor" type="xs:string"/>
+            <xs:element name="pieza" type="xs:string"/>
+            <xs:element name="remitoProvFecha" type="xs:date"/>
+            <xs:element name="remitoProvNumero" type="xs:string"/>
+            <xs:element name="ptoVenta" type="xs:string"/>
+            <xs:element name="numero" type="xs:string"/>
+            <xs:element name="remitoDefFecha" type="xs:date"/>
+            <xs:element name="fechaCarga" type="xs:date"/>
+            <xs:element name="fechaValidacion" type="xs:date"/>
+            <xs:element name="idUsuario" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

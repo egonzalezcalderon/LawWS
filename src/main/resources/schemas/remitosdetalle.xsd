@@ -1,0 +1,42 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://atos.com/lawws/webservice/xml/remitosdetalle"
+           targetNamespace="http://atos.com/lawws/webservice/xml/remitosdetalle"
+           elementFormDefault="qualified">
+
+    <xs:element name="remitosDetalleRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idProveedor" type="xs:string"/>
+                <xs:element name="fecha" type="xs:date"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="remitosDetalleResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="remitosDetalle" type="tns:detalleRemito" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="detalleRemito">
+        <xs:sequence>
+            <xs:element name="planta" type="xs:string"/>
+            <xs:element name="fecha" type="xs:date"/>
+            <xs:element name="punto" type="xs:string"/>
+            <xs:element name="knr" type="xs:string"/>
+            <xs:element name="tmaimc" type="xs:string"/>
+            <xs:element name="color" type="xs:string"/>
+            <xs:element name="prefijo" type="xs:string"/>
+            <xs:element name="basico" type="xs:string"/>
+            <xs:element name="sufijo" type="xs:string"/>
+            <xs:element name="cantidad" type="xs:int"/>
+            <xs:element name="proveedor" type="xs:string"/>
+            <xs:element name="fechaFis" type="xs:date"/>
+            <xs:element name="remito" type="xs:string"/>
+            <xs:element name="teileartgruppe" type="xs:string"/>
+            <xs:element name="notaPedido" type="xs:string"/>
+            <xs:element name="code7227" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

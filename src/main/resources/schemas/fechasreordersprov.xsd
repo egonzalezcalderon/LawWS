@@ -1,0 +1,22 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://atos.com/lawws/webservice/xml/fechasreordersprov"
+           targetNamespace="http://atos.com/lawws/webservice/xml/fechasreordersprov"
+           elementFormDefault="qualified">
+
+    <xs:element name="fechasReordersProvRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idProveedor" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="fechasReordersProvResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="fechasReordersProv" type="xs:date" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

@@ -1,0 +1,30 @@
+<div th:fragment="content">
+<div class="row">
+    <div class="col-sm-12">        
+        <form action="#" th:action="@{/maintenance/services/fechasreordersvw}" th:object="${inputFechasReordVW}" method="post">
+            Proveedor: <input type="text" th:field="*{id}" />
+            Fecha: <input type="date" th:field="*{fecha}" />
+            <input class="btn btn-default" type="submit" value="Ejecutar"/>              
+        </form>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>  
+                    <th>Fecha<th/>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="fechaReordVW : ${fechasReordVW}">
+                    <td th:text="${fechaReordVW}"><td/>
+                </tr>
+            </tbody>
+         </table>
+        </div>
+    </div>
+</div> 
+</div>

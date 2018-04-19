@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{structure/lawwspage}">
+<head>
+    <title>LawWS - Maintenance Services</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <h2>Mantenimiento de Servicios</h2>
+        <br>
+        <p>Seleccione el tab segun el servicio que desee testear.</p>
+        <br>
+        <ul class="nav nav-tabs">
+            <li><a data-toggle="tab" href="#remval">Remitos Validados</a></li>
+            <li><a data-toggle="tab" href="#remdet">Detalle Remitos</a></li>
+            <li><a data-toggle="tab" href="#remagr">Remitos Agrupado</a></li>
+            <li><a data-toggle="tab" href="#pendval">Pendientes Val</a></li>
+            <li><a data-toggle="tab" href="#pendcarg">Pendientes Carga</a></li>
+            <li><a data-toggle="tab" href="#fecreordvw">Fechas Reord VW</a></li>
+            <li><a data-toggle="tab" href="#fecreordprov">Fechas Reord Prov</a></li>
+            <li class="active"><a data-toggle="tab" href="#fecdisp">Fechas Disponibles</a></li>
+            <li><a data-toggle="tab" href="#consreordvw">Consulta Reord VW</a></li>
+            <li><a data-toggle="tab" href="#consreordprov">Consulta Reord Prov</a></li>
+            <li><a data-toggle="tab" href="#consrem">Consulta Remitos</a></li>
+            <li><a data-toggle="tab" href="#cantreordvw">Cantidad Reord VW</a></li>
+            <li><a data-toggle="tab" href="#cantreordprov">Cantidad Reord Prov</a></li>
+            <li><a data-toggle="tab" href="#cantrem">Cantidad Remitos</a></li>
+            <li><a data-toggle="tab" href="#altaremdef">Alta Rem Def</a></li>
+            <li><a data-toggle="tab" href="#actualizaremdef">Actualizacion Rem Def</a></li>
+        </ul>
+        <br><br>
+        <div class="tab-content">
+            <div id="remval" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="remdet" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="remagr" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="pendval" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="pendcarg" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="fecreordvw" class="tab-pane fade">
+                <div th:replace="services/fechasReordersVW :: content"/>
+            </div>
+            <div id="fecreordprov" class="tab-pane fade">
+                <div th:replace="services/fechasReordersProv :: content"/>
+            </div>
+            <div id="fecdisp" class="tab-pane fade in active">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="consreordvw" class="tab-pane fade">
+                <div th:replace="services/consultaReordersVW :: content"/>
+            </div>
+            <div id="consreordprov" class="tab-pane fade">
+                <div th:replace="services/consultaReordersProv :: content"/>
+            </div>
+            <div id="consrem" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="cantreordvw" class="tab-pane fade">
+                <div th:replace="services/cantidadReordersVW :: content"/>
+            </div>
+            <div id="cantreordprov" class="tab-pane fade">
+                <div th:replace="services/cantidadReordersProv :: content"/>
+            </div>
+            <div id="cantrem" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="altaremdef" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="actualizaremdef" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

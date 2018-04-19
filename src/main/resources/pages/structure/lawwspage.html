@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" th:href="@{/images/VolkswagenLogo.png}" type="image/x-icon" />
+    <div th:replace="components/imports :: imports"/>
+</head>
+<body>
+    <style>
+        #brand-image {
+            height: 25px;
+        }
+        #brand-text {
+            font-weight: bold;
+            font-size: large;
+        }		
+    </style>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img id="brand-image" alt="Volkswagen Logo" th:src="@{/images/VolkswagenLogo.png}"/>
+                </a>		  
+                <p id="brand-text" class="navbar-text">Law Web Services</p>
+            </div>
+            
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a th:href="@{/maintenance/log}">Log</a></li>
+                    <li><a th:href="@{/maintenance/services}">Mantenimiento</a></li>
+                    <li><a th:href="@{/logout}"><i class="glyphicon glyphicon-log-in"></i> Salir</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->            
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+        <div layout:fragment="content">
+            <!-- ============================================================================ -->
+            <!-- This content is only used for static prototyping purposes (natural templates)-->
+            <!-- and is therefore entirely optional, as this markup fragment will be included -->
+            <!-- from "fragments/header.html" at runtime.                                     -->
+            <!-- ============================================================================ -->
+            <h1>Static content for prototyping purposes only</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Praesent scelerisque neque neque, ac elementum quam dignissim interdum.
+                Phasellus et placerat elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Praesent scelerisque neque neque, ac elementum quam dignissim interdum.
+                Phasellus et placerat elit.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

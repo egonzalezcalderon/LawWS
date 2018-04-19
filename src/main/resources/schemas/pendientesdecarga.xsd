@@ -1,0 +1,33 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://atos.com/lawws/webservice/xml/pendientesdecarga"
+           targetNamespace="http://atos.com/lawws/webservice/xml/pendientesdecarga"
+           elementFormDefault="qualified">
+
+    <xs:element name="pendientesDeCargaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idProveedor" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="pendientesDeCargaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="remitosPendientesDeCarga" type="tns:remitoPendienteDeCarga" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="remitoPendienteDeCarga">
+        <xs:sequence>
+            <xs:element name="proveedor" type="xs:string"/>
+            <xs:element name="fecha" type="xs:date"/>
+            <xs:element name="codRemito" type="xs:string"/>
+            <xs:element name="pieza" type="xs:string"/>
+            <xs:element name="cantidad" type="xs:int"/>
+            <xs:element name="teileart" type="xs:string"/>
+            <xs:element name="teileartgruppe" type="xs:string"/>
+            <xs:element name="modelo" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

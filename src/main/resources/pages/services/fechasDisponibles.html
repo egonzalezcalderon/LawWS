@@ -1,0 +1,60 @@
+<div th:fragment="content">
+<div class="row">
+    <div class="col-sm-12">        
+        <form action="#" th:action="@{/maintenance/services/fechasdisponibles}" th:object="${proveedor}" method="post">
+            Proveedor: <input type="text" th:field="*{id}" />
+            Fecha: <input type="date" th:field="*{fecha}" />
+            <input class="btn btn-default" type="submit" value="Ejecutar"/>              
+        </form>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>  
+                    <th>Planta<th/>
+                    <th>Fecha<th/>
+                    <th>Punto<th/>
+                    <th>KNR<th/>
+                    <th>TMAIMC<th/>
+                    <th>Color<th/>
+                    <th>Prefijo<th/>
+                    <th>Basico<th/>
+                    <th>Sufijo<th/>
+                    <th>Cantidad<th/>
+                    <th>Proveedor<th/>
+                    <th>FechaFis<th/>
+                    <th>Remito<th/>
+                    <th>Teileartgruppe<th/>
+                    <th>NotaPedido<th/>
+                    <th>Code7227<th/>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="detalleRemito : ${detallesRemitos}">
+                    <td th:text="${detalleRemito.planta}"><td/>
+                    <td th:text="${detalleRemito.fecha}"><td/>
+                    <td th:text="${detalleRemito.punto}"><td/>
+                    <td th:text="${detalleRemito.knr}"><td/>
+                    <td th:text="${detalleRemito.tmaimc}"><td/>
+                    <td th:text="${detalleRemito.color}"><td/>
+                    <td th:text="${detalleRemito.prefijo}"><td/>
+                    <td th:text="${detalleRemito.basico}"><td/>
+                    <td th:text="${detalleRemito.sufijo}"><td/>
+                    <td th:text="${detalleRemito.cantidad}"><td/>
+                    <td th:text="${detalleRemito.proveedor}"><td/>
+                    <td th:text="${detalleRemito.fechaFis}"><td/>
+                    <td th:text="${detalleRemito.remito}"><td/>
+                    <td th:text="${detalleRemito.teileartgruppe}"><td/>
+                    <td th:text="${detalleRemito.notaPedido}"><td/>
+                    <td th:text="${detalleRemito.code7227}"><td/> 
+                </tr>
+            </tbody>
+         </table>
+        </div>
+    </div>
+</div> 
+</div>

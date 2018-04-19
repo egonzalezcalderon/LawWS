@@ -1,0 +1,23 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://atos.com/lawws/webservice/xml/cantidadreordersprov"
+           targetNamespace="http://atos.com/lawws/webservice/xml/cantidadreordersprov"
+           elementFormDefault="qualified">
+
+    <xs:element name="cantidadReordersProvRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idproveedor" type="xs:string"/>
+                <xs:element name="fecha" type="xs:date"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="cantidadReordersProvResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="cantidadPie" type="xs:int" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

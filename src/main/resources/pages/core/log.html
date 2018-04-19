@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{structure/lawwspage}">
+<head>
+    <title>LawWS - Maintenance Log</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <h2>Log de Servicios</h2>
+        <br>
+        <p>Seleccione las fechas entre las cuales desea ver las entradas de Log.</p>
+        <br>
+    <div class="row">    
+        <div class="col-sm-12">
+            <form action="#" th:action="@{/maintenance/log}" th:object="${logRequest}" method="post">
+                Fecha Desde: <input type="date" th:field="*{dateFrom}" />
+                Fecha Hasta: <input type="date" th:field="*{dateTo}" />
+                <input type="submit" value="Buscar" />            
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>  
+                        <th>Servicio Ejecutado</th>
+                        <th>Solicitud Realizada</th>
+                        <th>Fecha Inicio Pedido</th>
+                        <th>Fecha Fin Pedido</th>
+                        <th>Estado Final</th>
+                    </tr>
+                </thead>
+              <tbody>
+                    <tr th:each="logRecords : ${logRecords}">
+                        <td th:text="${logRecords.executedMethod}">-</td>
+                        <td th:text="${logRecords.requestMade}">-</td>
+                        <td th:text="${logRecords.startDate}">-</td>
+                        <td th:text="${logRecords.stopDate}">-</td>
+                        <td th:text="${logRecords.status}">-</td>
+                    </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>    
+        </div>        
+        <ul class="nav nav-tabs">
+            <li><a data-toggle="tab" href="#remval">Remitos Validados</a></li>
+            <li><a data-toggle="tab" href="#remdet">Detalle Remitos</a></li>
+            <li><a data-toggle="tab" href="#remagr">Remitos Agrupado</a></li>
+            <li><a data-toggle="tab" href="#pendval">Pendientes Val</a></li>
+            <li><a data-toggle="tab" href="#pendcarg">Pendientes Carga</a></li>
+            <li><a data-toggle="tab" href="#fecreordvw">Fechas Reord VW</a></li>
+            <li><a data-toggle="tab" href="#fecreordprov">Fechas Reord Prov</a></li>
+            <li class="active"><a data-toggle="tab" href="#fecdisp">Fechas Disponibles</a></li>
+            <li><a data-toggle="tab" href="#consreordvw">Consulta Reord VW</a></li>
+            <li><a data-toggle="tab" href="#consreordprov">Consulta Reord Prov</a></li>
+            <li><a data-toggle="tab" href="#consrem">Consulta Remitos</a></li>
+            <li><a data-toggle="tab" href="#cantreordvw">Cantidad Reord VW</a></li>
+            <li><a data-toggle="tab" href="#cantreordprov">Cantidad Reord Prov</a></li>
+            <li><a data-toggle="tab" href="#cantrem">Cantidad Remitos</a></li>
+            <li><a data-toggle="tab" href="#altaremdef">Alta Rem Def</a></li>
+            <li><a data-toggle="tab" href="#actualizaremdef">Actualizacion Rem Def</a></li>
+        </ul>
+        <br><br>
+        <div class="tab-content">
+            <div id="remval" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="remdet" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="remagr" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="pendval" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="pendcarg" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="fecreordvw" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="fecreordprov" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="fecdisp" class="tab-pane fade in active">
+                <div th:replace="services/fechasDisponibles :: content"/>
+            </div>
+            <div id="consreordvw" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="consreordprov" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="consrem" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="cantreordvw" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="cantreordprov" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="cantrem" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="altaremdef" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+            <div id="actualizaremdef" class="tab-pane fade">
+                <h3>Aun no Implementado</h3>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

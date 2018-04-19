@@ -1,0 +1,22 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://atos.com/lawws/webservice/xml/fechasdisponibles"
+           targetNamespace="http://atos.com/lawws/webservice/xml/fechasdisponibles"
+           elementFormDefault="qualified">
+
+    <xs:element name="fechasDisponiblesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idProveedor" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="fechasDisponiblesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="fechas" type="xs:date" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+</xs:schema>
