@@ -5,8 +5,8 @@
  */
 package com.atos.lawws.pseudocontrollers.impl;
 
-import com.atos.lawws.bussiness.impl.LawWSList;
-import com.atos.lawws.bussiness.impl.Proveedor;
+import com.atos.lawws.bussiness.impl.LawWSListBo;
+import com.atos.lawws.bussiness.impl.ProveedorBo;
 import com.atos.lawws.bussiness.impl.ReorderProvBo;
 import com.atos.lawws.bussiness.impl.ReorderVWBo;
 import com.atos.lawws.pseudocontrollers.core.PseudoController;
@@ -25,20 +25,20 @@ import org.springframework.web.servlet.ModelAndView;
  * @author a637201
  */
 @Service
-public class ConsultaReordersProvPseudoController extends PseudoController<Proveedor> {
+public class ConsultaReordersProvPseudoController extends PseudoController<ProveedorBo> {
 
     @Autowired
     ConsultaReordersProvService consultaReordersService;
     
     @Override
     public void fillControllerParameters(ModelAndView model) {
-        model.addObject("inputConsultaReordProv", new Proveedor());
+        model.addObject("inputConsultaReordProv", new ProveedorBo());
         model.addObject("reordersProv", new ArrayList<ReorderProvBo>());
     }
 
     @Override
-    public ModelAndView processRequest(ModelAndView modelAndView, Proveedor modelAttribute) {
-        LawWSList<ReorderProv, ReorderProvBo> reordersProv = consultaReordersService.serve(modelAttribute);
+    public ModelAndView processRequest(ModelAndView modelAndView, ProveedorBo modelAttribute) {
+        LawWSListBo<ReorderProv, ReorderProvBo> reordersProv = consultaReordersService.serve(modelAttribute);
                
         modelAndView.addObject("inputConsultaReordProv", modelAttribute);
         modelAndView.addObject("reordersProv", reordersProv.getElements());

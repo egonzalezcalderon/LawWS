@@ -5,14 +5,10 @@
  */
 package com.atos.lawws.services.core;
 
-import java.util.Date;
-import org.springframework.stereotype.Service;
-
 /**
  *
  * @author a637201
  */
-@Service
 public interface SingleTaskService<ExtRequest, ExtResponse, IntRequest, IntResponse> {
     
     public IntRequest translateRequest(ExtRequest extRequest);

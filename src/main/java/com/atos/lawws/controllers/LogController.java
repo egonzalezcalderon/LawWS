@@ -5,8 +5,8 @@
  */
 package com.atos.lawws.controllers;
 
-import com.atos.lawws.bussiness.impl.LogRecord;
-import com.atos.lawws.bussiness.impl.LogRequest;
+import com.atos.lawws.bussiness.impl.LogRecordBo;
+import com.atos.lawws.bussiness.impl.LogRequestBo;
 import com.atos.lawws.services.impl.LogQueryService;
 import com.atos.lawws.tools.DatesTool;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class LogController {
     
     @RequestMapping(value="/maintenance/log", method = RequestMethod.GET)
     public String queryLog(Model model) {
-        LogRequest logRequest = new LogRequest();
+        LogRequestBo logRequest = new LogRequestBo();
         logRequest.setDateFrom(DatesTool.getTodaysDate());
         logRequest.setDateTo(DatesTool.getTomorrowsDate());
         model.addAttribute("logRequest", logRequest);
@@ -44,7 +44,7 @@ public class LogController {
     }
 
     @RequestMapping(value="/maintenance/log", method = RequestMethod.POST)
-    public ModelAndView queryLog(@ModelAttribute LogRequest logRequest) {
+    public ModelAndView queryLog(@ModelAttribute LogRequestBo logRequest) {
         ModelAndView mav = new ModelAndView("core/log");
         mav.addObject("logRequest", logRequest);
         mav.addObject("logRecords", 

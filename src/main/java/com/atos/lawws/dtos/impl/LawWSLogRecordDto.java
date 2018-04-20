@@ -5,8 +5,8 @@
  */
 package com.atos.lawws.dtos.impl;
 
-import com.atos.lawws.bussiness.impl.LawWSLogRecord;
-import com.atos.lawws.bussiness.impl.LogRecord;
+import com.atos.lawws.bussiness.impl.LawWSLogRecordBo;
+import com.atos.lawws.bussiness.impl.LogRecordBo;
 import com.atos.lawws.bussiness.impl.ReorderVWBo;
 import com.atos.lawws.dtos.core.TransformableDto;
 import java.util.Date;
@@ -92,8 +92,8 @@ public class LawWSLogRecordDto{
         this.status = status;
     }
     
-    public LogRecord retrieveLogRecordBO() {
-        LogRecord logRecord = new LogRecord();
+    public LogRecordBo retrieveLogRecordBO() {
+        LogRecordBo logRecord = new LogRecordBo();
         logRecord.setExecutedMethod(executedMethod);
         logRecord.setRequestMade(requestMade);
         logRecord.setStartDate(startDate);

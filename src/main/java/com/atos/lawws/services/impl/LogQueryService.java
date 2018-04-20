@@ -5,8 +5,8 @@
  */
 package com.atos.lawws.services.impl;
 
-import com.atos.lawws.bussiness.impl.LogRecords;
-import com.atos.lawws.bussiness.impl.LogRequest;
+import com.atos.lawws.bussiness.impl.LogRecordsBo;
+import com.atos.lawws.bussiness.impl.LogRequestBo;
 import com.atos.lawws.daos.core.LawWSLogDao;
 import com.atos.lawws.dtos.impl.LawWSLogRecordDto;
 import com.atos.lawws.services.core.SingleTaskService;
@@ -22,8 +22,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LogQueryService implements SingleTaskService<
-        LogRequest,
-        LogRecords,
+        LogRequestBo,
+        LogRecordsBo,
         List<Date>,
         List<LawWSLogRecordDto>> {
 
@@ -31,7 +31,7 @@ public class LogQueryService implements SingleTaskService<
     LawWSLogDao lawWSLogDao;
     
     @Override
-    public List<Date> translateRequest(LogRequest extRequest) {
+    public List<Date> translateRequest(LogRequestBo extRequest) {
         List<Date> intRequest = new ArrayList<Date>();
         intRequest.add(extRequest.getDateFrom());
         intRequest.add(extRequest.getDateTo());
@@ -39,8 +39,8 @@ public class LogQueryService implements SingleTaskService<
     }
 
     @Override
-    public LogRecords translateResponse(List<LawWSLogRecordDto> intResponse) {
-        LogRecords lawWSLogRecords = new LogRecords();
+    public LogRecordsBo translateResponse(List<LawWSLogRecordDto> intResponse) {
+        LogRecordsBo lawWSLogRecords = new LogRecordsBo();
         for (LawWSLogRecordDto logRecord : intResponse) {
             lawWSLogRecords.getLogRecords().add(logRecord.retrieveLogRecordBO());
         }

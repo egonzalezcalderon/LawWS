@@ -5,9 +5,9 @@
  */
 package com.atos.lawws.pseudocontrollers.impl;
 
-import com.atos.lawws.bussiness.impl.LawWSInput;
-import com.atos.lawws.bussiness.impl.LawWSList;
-import com.atos.lawws.bussiness.impl.Proveedor;
+import com.atos.lawws.bussiness.impl.LawWSInputBo;
+import com.atos.lawws.bussiness.impl.LawWSListBo;
+import com.atos.lawws.bussiness.impl.ProveedorBo;
 import com.atos.lawws.pseudocontrollers.core.PseudoController;
 import com.atos.lawws.services.impl.CantidadReordersVWService;
 import java.util.ArrayList;
@@ -21,20 +21,20 @@ import org.springframework.web.servlet.ModelAndView;
  * @author a637201
  */
 @Service
-public class CantidadReordersVWPseudoController extends PseudoController<Proveedor> {
+public class CantidadReordersVWPseudoController extends PseudoController<ProveedorBo> {
    
     @Autowired
     CantidadReordersVWService cantidadReordersService;
     
     @Override
     public void fillControllerParameters(ModelAndView model) {
-        model.addObject("inputCantReordVW", new Proveedor());
+        model.addObject("inputCantReordVW", new ProveedorBo());
         model.addObject("cantReordVW", new ArrayList<Integer>());
     }
 
     @Override
-    public ModelAndView processRequest(ModelAndView modelAndView, Proveedor modelAttribute) {
-        LawWSList<Integer, LawWSInput<Integer>> cantidadReorders = cantidadReordersService.serve(modelAttribute);
+    public ModelAndView processRequest(ModelAndView modelAndView, ProveedorBo modelAttribute) {
+        LawWSListBo<Integer, LawWSInputBo<Integer>> cantidadReorders = cantidadReordersService.serve(modelAttribute);
         modelAndView.addObject("inputCantReordVW", modelAttribute);
         modelAndView.addObject("cantReordVW", cantidadReorders.translate());
         return modelAndView;

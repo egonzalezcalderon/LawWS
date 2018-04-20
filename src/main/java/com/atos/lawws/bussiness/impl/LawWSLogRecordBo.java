@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author a637201
  */
-public class LawWSLogRecord<IntRequest extends BussinessObject, 
+public class LawWSLogRecordBo<IntRequest extends BussinessObject, 
         IntResponse extends BussinessObject> extends BussinessObject {
     
     protected String serviceName;

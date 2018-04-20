@@ -6,7 +6,7 @@
 package com.atos.lawws.services.core;
 
 import com.atos.lawws.bussiness.core.BussinessObject;
-import com.atos.lawws.bussiness.impl.LawWSLogRecord;
+import com.atos.lawws.bussiness.impl.LawWSLogRecordBo;
 import com.atos.lawws.daos.core.LawWSLogDao;
 import java.util.Date;
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -33,7 +33,7 @@ public abstract class MonitoredService
 
     protected abstract IntResponse monitoredServe(IntRequest request) throws Exception;
 
-    protected LawWSLogRecord<IntRequest,IntResponse> logRecord = new LawWSLogRecord<IntRequest,IntResponse>();
+    protected LawWSLogRecordBo<IntRequest,IntResponse> logRecord = new LawWSLogRecordBo<IntRequest,IntResponse>();
         
     protected void logServiceExecution() {
         this.logger.info(logRecord.serialize());

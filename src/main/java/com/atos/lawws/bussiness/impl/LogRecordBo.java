@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author a637201
  */
-public class LogRecord extends BussinessObject {
+public class LogRecordBo extends BussinessObject {
 
     protected String executedMethod;
     protected String requestMade;

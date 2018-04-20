@@ -11,11 +11,11 @@ import com.atos.lawws.bussiness.core.TranslatableBussinessObject;
  *
  * @author a637201
  */
-public class LawWSInput<Input> extends TranslatableBussinessObject<Input> {
+public class LawWSInputBo<Input> extends TranslatableBussinessObject<Input> {
     
     protected Input input;
 
-    public LawWSInput(Input input) {
+    public LawWSInputBo(Input input) {
         this.input = input;
     }
 

@@ -13,14 +13,14 @@ import java.util.List;
  *
  * @author a637201
  */
-public class LogRecords extends BussinessObject {
-    List<LogRecord> logRecords = new ArrayList<LogRecord>();
+public class LogRecordsBo extends BussinessObject {
+    List<LogRecordBo> logRecords = new ArrayList<LogRecordBo>();
 
-    public List<LogRecord> getLogRecords() {
+    public List<LogRecordBo> getLogRecords() {
         return logRecords;
     }
 
-    public void setLogRecords(List<LogRecord> logRecords) {
+    public void setLogRecords(List<LogRecordBo> logRecords) {
         this.logRecords = logRecords;
     }
 }

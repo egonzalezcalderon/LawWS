@@ -5,9 +5,9 @@
  */
 package com.atos.lawws.services.impl;
 
-import com.atos.lawws.bussiness.impl.LawWSInput;
-import com.atos.lawws.bussiness.impl.LawWSList;
-import com.atos.lawws.bussiness.impl.Proveedor;
+import com.atos.lawws.bussiness.impl.LawWSInputBo;
+import com.atos.lawws.bussiness.impl.LawWSListBo;
+import com.atos.lawws.bussiness.impl.ProveedorBo;
 import com.atos.lawws.daos.impl.ConsultaCantidadReordersProvDaoImpl;
 import com.atos.lawws.dtos.impl.CantidadReorderProvDto;
 import com.atos.lawws.services.core.MonitoredService;
@@ -26,8 +26,8 @@ import org.springframework.stereotype.Service;
 public class CantidadReordersProvService extends MonitoredService<
         CantidadReordersProvRequest,
         CantidadReordersProvResponse,
-        Proveedor,
-        LawWSList<Integer, LawWSInput<Integer>>> {
+        ProveedorBo,
+        LawWSListBo<Integer, LawWSInputBo<Integer>>> {
 
     @Autowired
     ConsultaCantidadReordersProvDaoImpl consultaCantidadReordersDao;
@@ -38,9 +38,9 @@ public class CantidadReordersProvService extends MonitoredService<
     }
 
     @Override
-    protected LawWSList monitoredServe(Proveedor request) {
+    protected LawWSListBo monitoredServe(ProveedorBo request) {
         List<CantidadReorderProvDto> cantidadReorders = consultaCantidadReordersDao.getCantidadReordersProv(request.getId(), request.getFecha());
-        LawWSList<Integer, LawWSInput<Integer>> lawwsList = new LawWSList<Integer, LawWSInput<Integer>>();
+        LawWSListBo<Integer, LawWSInputBo<Integer>> lawwsList = new LawWSListBo<Integer, LawWSInputBo<Integer>>();
         
         for (CantidadReorderProvDto cantidadReorder : cantidadReorders) {
             lawwsList.getElements().add(cantidadReorder.translate());
@@ -50,15 +50,15 @@ public class CantidadReordersProvService extends MonitoredService<
     }
 
     @Override
-    public Proveedor translateRequest(CantidadReordersProvRequest extRequest) {
-        Proveedor proveedor = new Proveedor();
+    public ProveedorBo translateRequest(CantidadReordersProvRequest extRequest) {
+        ProveedorBo proveedor = new ProveedorBo();
         proveedor.setId(extRequest.getIdproveedor());
         proveedor.setFecha(DatesTool.getDate(extRequest.getFecha()));
         return proveedor;
     }
 
     @Override
-    public CantidadReordersProvResponse translateResponse(LawWSList<Integer, LawWSInput<Integer>> intResponse) {
+    public CantidadReordersProvResponse translateResponse(LawWSListBo<Integer, LawWSInputBo<Integer>> intResponse) {
         CantidadReordersProvResponse cantidadReordersResponse = new CantidadReordersProvResponse();
         
         List<Integer> cantidadReorders = intResponse.translate();

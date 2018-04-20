@@ -5,9 +5,9 @@
  */
 package com.atos.lawws.services.impl;
 
-import com.atos.lawws.bussiness.impl.LawWSDate;
-import com.atos.lawws.bussiness.impl.LawWSList;
-import com.atos.lawws.bussiness.impl.Proveedor;
+import com.atos.lawws.bussiness.impl.LawWSDateBo;
+import com.atos.lawws.bussiness.impl.LawWSListBo;
+import com.atos.lawws.bussiness.impl.ProveedorBo;
 import com.atos.lawws.bussiness.impl.ReorderVWBo;
 import com.atos.lawws.daos.impl.ConsultaFechasReordersProvDaoImpl;
 import com.atos.lawws.daos.impl.ConsultaReordersProvDaoImpl;
@@ -34,8 +34,8 @@ import org.springframework.stereotype.Service;
 public class FechasReordersProvService extends MonitoredService<
         FechasReordersProvRequest,
         FechasReordersProvResponse,
-        Proveedor,
-        LawWSList<XMLGregorianCalendar, LawWSDate>> {
+        ProveedorBo,
+        LawWSListBo<XMLGregorianCalendar, LawWSDateBo>> {
 
     @Autowired
     ConsultaFechasReordersProvDaoImpl consultaFechasReordersDao;
@@ -46,9 +46,9 @@ public class FechasReordersProvService extends MonitoredService<
     }
 
     @Override
-    protected LawWSList monitoredServe(Proveedor request) {
+    protected LawWSListBo monitoredServe(ProveedorBo request) {
         List<FechaReorderProvDto> reordersDates = consultaFechasReordersDao.getVWReordersDates(request.getId());
-        LawWSList<XMLGregorianCalendar, LawWSDate> lawwsList = new LawWSList<XMLGregorianCalendar, LawWSDate>();
+        LawWSListBo<XMLGregorianCalendar, LawWSDateBo> lawwsList = new LawWSListBo<XMLGregorianCalendar, LawWSDateBo>();
         
         for (FechaReorderProvDto reorderDate : reordersDates) {
             lawwsList.getElements().add(reorderDate.translate());
@@ -58,14 +58,14 @@ public class FechasReordersProvService extends MonitoredService<
     }
 
     @Override
-    public Proveedor translateRequest(FechasReordersProvRequest extRequest) {
-        Proveedor proveedor = new Proveedor();
+    public ProveedorBo translateRequest(FechasReordersProvRequest extRequest) {
+        ProveedorBo proveedor = new ProveedorBo();
         proveedor.setId(extRequest.getIdProveedor());
         return proveedor;
     }
 
     @Override
-    public FechasReordersProvResponse translateResponse(LawWSList<XMLGregorianCalendar, LawWSDate> intResponse) {
+    public FechasReordersProvResponse translateResponse(LawWSListBo<XMLGregorianCalendar, LawWSDateBo> intResponse) {
         FechasReordersProvResponse consultaReorders = new FechasReordersProvResponse();
         
         List<XMLGregorianCalendar> dates = intResponse.translate();

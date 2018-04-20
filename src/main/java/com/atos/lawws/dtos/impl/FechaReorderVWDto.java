@@ -5,7 +5,7 @@
  */
 package com.atos.lawws.dtos.impl;
 
-import com.atos.lawws.bussiness.impl.LawWSDate;
+import com.atos.lawws.bussiness.impl.LawWSDateBo;
 import com.atos.lawws.bussiness.impl.ReorderProvBo;
 import com.atos.lawws.dtos.core.TransformableDto;
 import java.io.Serializable;
@@ -31,7 +31,7 @@ import javax.persistence.StoredProcedureParameter;
             @StoredProcedureParameter(name="p_cursor", mode = ParameterMode.REF_CURSOR, type = void.class)
 	}
 )
-public class FechaReorderVWDto extends TransformableDto<LawWSDate> implements Serializable {
+public class FechaReorderVWDto extends TransformableDto<LawWSDateBo> implements Serializable {
     
     protected Date date;
        
@@ -46,8 +46,8 @@ public class FechaReorderVWDto extends TransformableDto<LawWSDate> implements Se
     }
     
     @Override
-    public LawWSDate translate() {
-        return translate(new LawWSDate());
+    public LawWSDateBo translate() {
+        return translate(new LawWSDateBo());
     }    
 
 }

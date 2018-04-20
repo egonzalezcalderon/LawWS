@@ -5,8 +5,8 @@
  */
 package com.atos.lawws.services.impl;
 
-import com.atos.lawws.bussiness.impl.LawWSList;
-import com.atos.lawws.bussiness.impl.Proveedor;
+import com.atos.lawws.bussiness.impl.LawWSListBo;
+import com.atos.lawws.bussiness.impl.ProveedorBo;
 import com.atos.lawws.bussiness.impl.ReorderVWBo;
 import com.atos.lawws.daos.impl.ConsultaReordersVWDaoImpl;
 import com.atos.lawws.dtos.impl.ReorderVWDto;
@@ -27,8 +27,8 @@ import org.springframework.stereotype.Service;
 public class ConsultaReordersVWService extends MonitoredService<
         ConsultaReordersVWRequest,
         ConsultaReordersVWResponse,
-        Proveedor,
-        LawWSList<ReorderVW, ReorderVWBo>> {
+        ProveedorBo,
+        LawWSListBo<ReorderVW, ReorderVWBo>> {
 
     @Autowired
     ConsultaReordersVWDaoImpl consultaReordersDao;
@@ -39,9 +39,9 @@ public class ConsultaReordersVWService extends MonitoredService<
     }
 
     @Override
-    protected LawWSList monitoredServe(Proveedor request) {
+    protected LawWSListBo monitoredServe(ProveedorBo request) {
         List<ReorderVWDto> reorders = consultaReordersDao.getVWReorders(request.getId(), request.getFecha());
-        LawWSList<ReorderVW, ReorderVWBo> lawwsList = new LawWSList<ReorderVW, ReorderVWBo>();
+        LawWSListBo<ReorderVW, ReorderVWBo> lawwsList = new LawWSListBo<ReorderVW, ReorderVWBo>();
         
         for (ReorderVWDto reorder : reorders) {
             lawwsList.getElements().add(reorder.translate());
@@ -51,15 +51,15 @@ public class ConsultaReordersVWService extends MonitoredService<
     }
 
     @Override
-    public Proveedor translateRequest(ConsultaReordersVWRequest extRequest) {
-        Proveedor proveedor = new Proveedor();
+    public ProveedorBo translateRequest(ConsultaReordersVWRequest extRequest) {
+        ProveedorBo proveedor = new ProveedorBo();
         proveedor.setId(extRequest.getIdProveedor());
         proveedor.setFecha(DatesTool.getDate(extRequest.getFecha()));
         return proveedor;
     }
 
     @Override
-    public ConsultaReordersVWResponse translateResponse(LawWSList<ReorderVW, ReorderVWBo> intResponse) {
+    public ConsultaReordersVWResponse translateResponse(LawWSListBo<ReorderVW, ReorderVWBo> intResponse) {
         ConsultaReordersVWResponse consultaReorders = new ConsultaReordersVWResponse();
         
         List<ReorderVW> reorders = intResponse.translate();

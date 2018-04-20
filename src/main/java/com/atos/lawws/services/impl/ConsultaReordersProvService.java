@@ -5,8 +5,8 @@
  */
 package com.atos.lawws.services.impl;
 
-import com.atos.lawws.bussiness.impl.LawWSList;
-import com.atos.lawws.bussiness.impl.Proveedor;
+import com.atos.lawws.bussiness.impl.LawWSListBo;
+import com.atos.lawws.bussiness.impl.ProveedorBo;
 import com.atos.lawws.bussiness.impl.ReorderProvBo;
 import com.atos.lawws.daos.impl.ConsultaReordersProvDaoImpl;
 import com.atos.lawws.dtos.impl.ReorderProvDto;
@@ -27,8 +27,8 @@ import org.springframework.stereotype.Service;
 public class ConsultaReordersProvService extends MonitoredService<
         ConsultaReordersProvRequest,
         ConsultaReordersProvResponse,
-        Proveedor,
-        LawWSList<ReorderProv, ReorderProvBo>> {
+        ProveedorBo,
+        LawWSListBo<ReorderProv, ReorderProvBo>> {
 
     @Autowired
     ConsultaReordersProvDaoImpl consultaReordersDao;
@@ -39,9 +39,9 @@ public class ConsultaReordersProvService extends MonitoredService<
     }
 
     @Override
-    protected LawWSList monitoredServe(Proveedor request) {
+    protected LawWSListBo monitoredServe(ProveedorBo request) {
         List<ReorderProvDto> reorders = consultaReordersDao.getProvReorders(request.getId(), request.getFecha());
-        LawWSList<ReorderProv, ReorderProvBo> lawwsList = new LawWSList<ReorderProv, ReorderProvBo>();
+        LawWSListBo<ReorderProv, ReorderProvBo> lawwsList = new LawWSListBo<ReorderProv, ReorderProvBo>();
         
         for (ReorderProvDto reorder : reorders) {
             lawwsList.getElements().add(reorder.translate());
@@ -51,15 +51,15 @@ public class ConsultaReordersProvService extends MonitoredService<
     }
 
     @Override
-    public Proveedor translateRequest(ConsultaReordersProvRequest extRequest) {
-        Proveedor proveedor = new Proveedor();
+    public ProveedorBo translateRequest(ConsultaReordersProvRequest extRequest) {
+        ProveedorBo proveedor = new ProveedorBo();
         proveedor.setId(extRequest.getIdProveedor());
         proveedor.setFecha(DatesTool.getDate(extRequest.getFecha()));
         return proveedor;
     }
 
     @Override
-    public ConsultaReordersProvResponse translateResponse(LawWSList<ReorderProv, ReorderProvBo> intResponse) {
+    public ConsultaReordersProvResponse translateResponse(LawWSListBo<ReorderProv, ReorderProvBo> intResponse) {
         ConsultaReordersProvResponse consultaReorders = new ConsultaReordersProvResponse();
         
         List<ReorderProv> reorders = intResponse.translate();

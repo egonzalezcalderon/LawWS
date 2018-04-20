@@ -5,7 +5,7 @@
  */
 package com.atos.lawws.dtos.impl;
 
-import com.atos.lawws.bussiness.impl.LawWSInput;
+import com.atos.lawws.bussiness.impl.LawWSInputBo;
 import com.atos.lawws.bussiness.impl.ReorderProvBo;
 import com.atos.lawws.dtos.core.TransformableDto;
 import java.io.Serializable;
@@ -32,7 +32,7 @@ import javax.persistence.StoredProcedureParameter;
             @StoredProcedureParameter(name="p_cursor", mode = ParameterMode.REF_CURSOR, type = void.class)
 	}
 )
-public class CantidadReorderProvDto extends TransformableDto<LawWSInput> implements Serializable {
+public class CantidadReorderProvDto extends TransformableDto<LawWSInputBo> implements Serializable {
     
     protected Integer cantidadPie;
        
@@ -47,8 +47,8 @@ public class CantidadReorderProvDto extends TransformableDto<LawWSInput> impleme
     }
     
     @Override
-    public LawWSInput translate() {
-        return new LawWSInput(cantidadPie);
+    public LawWSInputBo translate() {
+        return new LawWSInputBo(cantidadPie);
     }    
 
     

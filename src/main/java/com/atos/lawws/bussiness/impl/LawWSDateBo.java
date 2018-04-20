@@ -14,7 +14,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *
  * @author a637201
  */
-public class LawWSDate extends TranslatableBussinessObject<XMLGregorianCalendar> {
+public class LawWSDateBo extends TranslatableBussinessObject<XMLGregorianCalendar> {
     
     protected Date date;
 

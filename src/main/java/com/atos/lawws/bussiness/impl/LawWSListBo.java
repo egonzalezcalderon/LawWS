@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author a637201
  */
-public class LawWSList<Translation, Element extends TranslatableBussinessObject<Translation>> extends BussinessObject {
+public class LawWSListBo<Translation, Element extends TranslatableBussinessObject<Translation>> extends BussinessObject {
     List<Element> elements = new ArrayList<Element>();
 
     public List<Element> getElements() {

@@ -6,6 +6,7 @@
 package com.atos.lawws.bussiness.impl;
 
 import com.atos.lawws.bussiness.core.BussinessObject;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,26 +14,32 @@ import org.springframework.format.annotation.DateTimeFormat;
  *
  * @author a637201
  */
-public class LogRequest extends BussinessObject {
+public class ProveedorBo extends BussinessObject {
+    
+    protected String id;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    protected Date dateFrom;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    protected Date dateTo;
+    protected Date fecha;
 
-    public Date getDateFrom() {
-        return dateFrom;
+    public ProveedorBo() {
+        this.id = "1";
+        this.fecha = new Date();
+    }
+        
+    public String getId() {
+        return id;
     }
 
-    public void setDateFrom(Date dateFrom) {
-        this.dateFrom = dateFrom;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Date getDateTo() {
-        return dateTo;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setDateTo(Date dateTo) {
-        this.dateTo = dateTo;
-    }
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }   
+
 }

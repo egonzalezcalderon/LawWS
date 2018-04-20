@@ -5,7 +5,7 @@
  */
 package com.atos.lawws.controllers;
 
-import com.atos.lawws.bussiness.impl.Proveedor;
+import com.atos.lawws.bussiness.impl.ProveedorBo;
 import com.atos.lawws.pseudocontrollers.impl.CantidadReordersProvPseudoController;
 import com.atos.lawws.pseudocontrollers.impl.CantidadReordersVWPseudoController;
 import com.atos.lawws.pseudocontrollers.impl.ConsultaReordersProvPseudoController;
@@ -62,7 +62,7 @@ public class ServicesController {
     }   
     
     @RequestMapping(value="/maintenance/services/cantidadreordersprov", method = RequestMethod.POST)
-    public ModelAndView cantidadReordersProv(@ModelAttribute Proveedor proveedor) {
+    public ModelAndView cantidadReordersProv(@ModelAttribute ProveedorBo proveedor) {
         return cantidadReordersProvPseudoController.processRequest(getBasicModelAndView(), proveedor);
     }
     
@@ -72,7 +72,7 @@ public class ServicesController {
     }   
     
     @RequestMapping(value="/maintenance/services/cantidadreordersvw", method = RequestMethod.POST)
-    public ModelAndView cantidadReordersVW(@ModelAttribute Proveedor proveedor) {
+    public ModelAndView cantidadReordersVW(@ModelAttribute ProveedorBo proveedor) {
         return cantidadReordersVWPseudoController.processRequest(getBasicModelAndView(), proveedor);
     }
 
@@ -82,7 +82,7 @@ public class ServicesController {
     }   
     
     @RequestMapping(value="/maintenance/services/consultareordersprov", method = RequestMethod.POST)
-    public ModelAndView consultaReordersProv(@ModelAttribute Proveedor proveedor) {
+    public ModelAndView consultaReordersProv(@ModelAttribute ProveedorBo proveedor) {
         return consultaReordersProvPseudoController.processRequest(getBasicModelAndView(), proveedor);
     }
 
@@ -92,7 +92,7 @@ public class ServicesController {
     }   
     
     @RequestMapping(value="/maintenance/services/consultareordersvw", method = RequestMethod.POST)
-    public ModelAndView consultaReordersVW(@ModelAttribute Proveedor proveedor) {
+    public ModelAndView consultaReordersVW(@ModelAttribute ProveedorBo proveedor) {
         return consultaReordersVWPseudoController.processRequest(getBasicModelAndView(), proveedor);
     }
 
@@ -102,7 +102,7 @@ public class ServicesController {
     }   
     
     @RequestMapping(value="/maintenance/services/fechasreordersprov", method = RequestMethod.POST)
-    public ModelAndView fechasReordersProv(@ModelAttribute Proveedor proveedor) {
+    public ModelAndView fechasReordersProv(@ModelAttribute ProveedorBo proveedor) {
         return fechasReordersProvPseudoController.processRequest(getBasicModelAndView(), proveedor);
     }    
     
@@ -112,7 +112,7 @@ public class ServicesController {
     }   
     
     @RequestMapping(value="/maintenance/services/fechasreordersvw", method = RequestMethod.POST)
-    public ModelAndView fechasReordersVW(@ModelAttribute Proveedor proveedor) {
+    public ModelAndView fechasReordersVW(@ModelAttribute ProveedorBo proveedor) {
         return fechasReordersVWPseudoController.processRequest(getBasicModelAndView(), proveedor);
     }        
     
