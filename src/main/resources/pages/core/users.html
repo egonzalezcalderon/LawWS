@@ -8,9 +8,13 @@
 <body>
     <div layout:fragment="content">
     <script>   
-        function nuevoUsuario(nombre, descripcion) {
-            $('#otroName').val(nombre);
-            $('#otroDescription').val(descripcion);
+        function abrirDialogoUsuarios(id, nombre, password, descripcion, admRole, mantRole) {
+            $('#alterUserId').val(id);
+            $('#alterUserName').val(nombre);
+            $('#alterUserPassword').val(password);
+            $('#alterUserDescription').val(descripcion);
+            $('#alterUserAdmRole').prop('checked', admRole);
+            $('#alterUserMantRole').prop('checked', mantRole);
         } 
     </script>        
     <h2>Usuarios del Web Service</h2>
@@ -33,20 +37,40 @@
                 <thead>
                     <tr>  
                         <th>Nombre Usuario</th>
+                        <th>Password</th>
                         <th>Descripcion</th>
+                        <th>Administracion</th>
+                        <th>Mantenimiento</th>
+                        <th>Modificar</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
               <tbody>
                     <tr th:each="userResult : ${searchUserResult}">
                         <td th:text="${userResult.name}">-</td>
+                        <td th:text="${userResult.password}">-</td>
                         <td th:text="${userResult.description}">-</td>
+                        <td><input type="checkbox" th:checked="${userResult.admRole}" disabled="disabled"/></td>
+                        <td><input type="checkbox" th:checked="${userResult.mantRole}" disabled="disabled"/></td>
+                        <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#newUserDialog" 
+                                    th:onclick="'javascript:abrirDialogoUsuarios(\'' + ${userResult.id} + '\',\'' + ${userResult.name} + '\',\'' + ${userResult.password} + '\',\'' + ${userResult.description} + '\',' + ${userResult.admRole} + ',' + ${userResult.mantRole} + ')'">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <form action="#" th:action="@{/administration/users/deleteuser}" th:object="${userResult}" method="post">
+                                <input id="deleteUserId" type="hidden" th:value="*{id}" name="id" />  
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="glyphicon glyphicon-erase"></i>
+                                </button>
+                            </form>
+                        </td>
                     </tr>
               </tbody>
             </table>
         </div>
     </div>   
-    <!-- Button trigger modal -->
-    <button id="newUser" type="button" class="btn btn-primary" data-toggle="modal" data-target="#newUserDialog" onclick="nuevoUsuario('Eduardo','Un buen usuario')">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newUserDialog" onclick="abrirDialogoUsuarios('','','','',false,false)">
       Nuevo Usuario
     </button>
     
@@ -61,18 +85,28 @@
           </div>
           <form action="#" th:action="@{/administration/users/saveuser}" th:object="${newUser}" method="post">
           <div class="modal-body">
-                <div class="form-group">
-                    <label for="otroName">Nombre Usuario</label><br>
-                    <input type="text" th:field="*{name}" />
+              <input id="alterUserId" type="hidden" th:value="*{id}" name="id" />  
+              <div class="form-group">
+                    <label for="alterUserName">Nombre Usuario</label><br>
+                    <input id="alterUserName" type="text" th:field="*{name}" />
                 </div>
                 <div class="form-group">
-                    <label for="otroDescription">Password</label><br>
-                    <input type="password" th:field="*{password}" />
+                    <label for="alterUserPassword">Password</label><br>
+                    <input id="alterUserPassword" type="password" th:field="*{password}" />
                 </div>
                 <div class="form-group">
-                    <label for="otroDescription">Descripcion</label><br>
-                    <input type="text" th:field="*{description}" />
-                </div>                    
+                    <label for="alterUserDescription">Descripcion</label><br>
+                    <input id="alterUserDescription" type="text" th:field="*{description}" />
+                </div>   
+                <div class="form-group">
+                    <label th:for="${#ids.next('alterUserAdmRol')}">Rol de Administracion</label><br>
+                    <input id="alterUserAdmRole" type="checkbox" th:field="*{admRole}" />
+                </div>                 
+                <div class="form-group">
+                    <label th:for="${#ids.next('alterUserMantRol')}">Rol de Mantenimiento</label><br>
+                    <input id="alterUserMantRole" type="checkbox" th:field="*{mantRole}" />
+                </div>                               
+              
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -81,7 +115,7 @@
           </form>
         </div>
       </div>
-    </div>    
+    </div>      
     
     </div>       
 </body>

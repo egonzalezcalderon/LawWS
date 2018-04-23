@@ -15,7 +15,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 public abstract class BussinessObject {
 
     public String serialize() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.MULTI_LINE_STYLE);
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
     
 }

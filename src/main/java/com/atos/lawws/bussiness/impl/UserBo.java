@@ -6,7 +6,11 @@
 package com.atos.lawws.bussiness.impl;
 
 import com.atos.lawws.bussiness.core.TranslatableBussinessObject;
+import com.atos.lawws.dtos.impl.RoleDto;
 import com.atos.lawws.dtos.impl.UserDto;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  *
@@ -18,6 +22,7 @@ public class UserBo extends TranslatableBussinessObject<UserDto> {
     protected String name;
     protected String password;
     protected String description;
+    protected LawWSListBo<RoleDto, RoleBo> roles = new LawWSListBo<RoleDto, RoleBo>();
     
     public Integer getId() {
         return id;
@@ -50,10 +55,54 @@ public class UserBo extends TranslatableBussinessObject<UserDto> {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public LawWSListBo<RoleDto, RoleBo> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(LawWSListBo<RoleDto, RoleBo> roles) {
+        this.roles = roles;
+    }
+    
+    public Boolean getMantRole() {
+        return isRolPresent("MANTENIMIENTO");
+    }
+    
+    public void setMantRole(Boolean mantRole) {
+        setRolValue(1, "MANTENIMIENTO", mantRole);
+    }    
+    
+    public Boolean getAdmRole() {
+        return isRolPresent("ADMINISTRACION");
+    }
+    
+    public void setAdmRole(Boolean admRole) {
+        setRolValue(2, "ADMINISTRACION", admRole);
+    }
+    
+    protected Boolean isRolPresent(String rolName) {
+        for (RoleBo role : roles.getElements()) {
+            if (role.getName().trim().equals(rolName.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    protected void setRolValue(Integer rolId, String rolName, Boolean value) {
+        if (value) {
+            RoleBo newRole = new RoleBo();
+            newRole.setId(rolId);
+            newRole.setName(rolName);
+            roles.getElements().add(newRole);
+        }
+    }
     
     @Override
     public UserDto translate() {
-        return translate(new UserDto());
+        UserDto user = translate(new UserDto());
+        user.setRoles(new HashSet(roles.translate()));
+        return user;
     }
     
 }

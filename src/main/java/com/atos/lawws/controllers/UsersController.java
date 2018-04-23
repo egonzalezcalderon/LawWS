@@ -32,12 +32,10 @@ public class UsersController {
     protected ModelAndView getUsersModelAndView(
             UserBo searchUser, 
             List<UserBo> searchUserResult,
-            UserBo newUser, 
-            UserBo alterUser) {
+            UserBo newUser) {
         ModelAndView mav = new ModelAndView("core/users");
         mav.addObject("searchUser", searchUser);
         mav.addObject("newUser", newUser);
-        mav.addObject("alterUser", alterUser);
         mav.addObject("searchUserResult", searchUserResult);
         return mav;
     } 
@@ -46,8 +44,7 @@ public class UsersController {
     public ModelAndView users(Model model) {
         return getUsersModelAndView(
                 new UserBo(), 
-                new ArrayList<UserBo>(),
-                new UserBo(), 
+                new ArrayList<UserBo>(), 
                 new UserBo());
     }
     
@@ -55,8 +52,7 @@ public class UsersController {
     public ModelAndView users(@ModelAttribute UserBo userQuery) {
         return getUsersModelAndView(
                 userQuery, 
-                userQueryService.serve(new UserRequestBo(userQuery, true, false)).getUsers(),
-                new UserBo(), 
+                userQueryService.serve(new UserRequestBo(userQuery, true, false)).getUsers(), 
                 new UserBo());
     }
     
@@ -64,8 +60,7 @@ public class UsersController {
     public ModelAndView saveUser(Model model) {
         return getUsersModelAndView(
                 new UserBo(), 
-                new ArrayList<UserBo>(),
-                new UserBo(), 
+                new ArrayList<UserBo>(), 
                 new UserBo());  
     }
     
@@ -73,9 +68,23 @@ public class UsersController {
     public ModelAndView saveUser(@ModelAttribute UserBo user) {
         return getUsersModelAndView(
                 user, 
-                userQueryService.serve(new UserRequestBo(user, false, false)).getUsers(),
-                new UserBo(), 
+                userQueryService.serve(new UserRequestBo(user, false, false)).getUsers(), 
                 new UserBo());
     }    
     
+    @RequestMapping(value="/administration/users/deleteuser", method = RequestMethod.GET)
+    public ModelAndView deleteUser(Model model) {
+        return getUsersModelAndView(
+                new UserBo(), 
+                new ArrayList<UserBo>(), 
+                new UserBo());  
+    }
+    
+    @RequestMapping(value="/administration/users/deleteuser", method = RequestMethod.POST)
+    public ModelAndView deleteUser(@ModelAttribute UserBo user) {
+        return getUsersModelAndView(
+                user, 
+                userQueryService.serve(new UserRequestBo(user, false, true)).getUsers(), 
+                new UserBo());
+    }        
 }

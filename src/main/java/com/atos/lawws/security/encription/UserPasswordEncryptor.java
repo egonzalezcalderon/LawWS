@@ -5,12 +5,11 @@
  */
 package com.atos.lawws.security.encription;
 
+import java.nio.charset.StandardCharsets;
 import javax.annotation.PostConstruct;
 import javax.crypto.Cipher;
-import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Component;
 
@@ -21,29 +20,30 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserPasswordEncryptor implements AttributeConverter<String, String> {
 
-    protected static final String SECRET_KEY_1 = "ssdkF$HUy2A#D%kd";
-    protected static final String SECRET_KEY_2 = "weJiSEvR5yAC5ftB";
- 
-    protected IvParameterSpec ivParameterSpec;
-    protected SecretKeySpec secretKeySpec;
-    protected Cipher cipher;
+    protected static SecretKeySpec secretKey;
+    protected static Cipher cipher;
+    protected static final String SECRET = "ADBSJHJS12547896";
+    protected static final String ALGORITHM = "AES";
+    
+    public UserPasswordEncryptor() {
+    }
     
     @PostConstruct
     public void init() {
         try {
-            ivParameterSpec = new IvParameterSpec(SECRET_KEY_1.getBytes("UTF-8"));
-            secretKeySpec = new SecretKeySpec(SECRET_KEY_2.getBytes("UTF-8"), "AES");
-            cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+            secretKey = new SecretKeySpec(SECRET.getBytes(), ALGORITHM);
+            cipher = Cipher.getInstance(ALGORITHM);
         } catch (Exception e) {            
         }
     }    
     
     @Override
     public String convertToDatabaseColumn(String attribute) {
-        try {
-            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec);
-            byte[] encrypted = cipher.doFinal(attribute.getBytes());
-            return Base64.encodeBase64String(encrypted);
+        try {            
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+            byte[] encryptedVal = cipher.doFinal(attribute.getBytes());
+            byte[] encodedValue = new Base64().encode(encryptedVal);
+            return new String(encodedValue, "UTF-8");  
         } catch (Exception e) {
         }
         return attribute;
@@ -51,13 +51,30 @@ public class UserPasswordEncryptor implements AttributeConverter<String, String>
 
     @Override
     public String convertToEntityAttribute(String dbData) {
-        try {
-            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, ivParameterSpec);
-            byte[] decryptedBytes = cipher.doFinal(Base64.decodeBase64(dbData));
-            return new String(decryptedBytes);
+        try {          
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+            byte[] decodedValue = new Base64().decode(dbData.getBytes("UTF-8"));
+            byte[] decryptedVal = cipher.doFinal(decodedValue);
+            return new String(decryptedVal);
         } catch (Exception e) {
         }
         return dbData;
+    }
+
+    public SecretKeySpec getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(SecretKeySpec secretKey) {
+        secretKey = secretKey;
+    }
+
+    public Cipher getCipher() {
+        return cipher;
+    }
+
+    public void setCipher(Cipher cipher) {
+        cipher = cipher;
     }
     
 }

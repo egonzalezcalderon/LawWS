@@ -9,14 +9,22 @@ import com.atos.lawws.bussiness.impl.UserBo;
 import com.atos.lawws.dtos.core.TransformableDto;
 import com.atos.lawws.security.encription.UserPasswordEncryptor;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import static org.apache.tomcat.jni.Lock.name;
 
 /**
  *
@@ -30,6 +38,7 @@ public class UserDto extends TransformableDto<UserBo> implements Serializable {
     protected String name;
     protected String password;
     protected String description;
+    protected Set<RoleDto> roles = new HashSet<RoleDto>();
     
     @Id
     @Column(name="ID")   
@@ -71,9 +80,29 @@ public class UserDto extends TransformableDto<UserBo> implements Serializable {
         this.description = description;
     }
     
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name="WEB_SERVICE_USUARIOS_PERFILES",
+            joinColumns = {@JoinColumn(name = "ID_USUARIO")},
+            inverseJoinColumns = {@JoinColumn(name = "ID_PERFIL")}
+    )
+    public Set<RoleDto> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleDto> roles) {
+        this.roles = roles;
+    }
+    
     @Override
     public UserBo translate() {
-        return translate(new UserBo());
+        UserBo user = translate(new UserBo());
+        
+        for (RoleDto role : roles) {
+            user.getRoles().getElements().add(role.translate());
+        }
+        
+        return user;
     }  
 
 }

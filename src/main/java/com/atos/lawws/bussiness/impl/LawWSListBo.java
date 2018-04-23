@@ -9,6 +9,8 @@ import com.atos.lawws.bussiness.core.BussinessObject;
 import com.atos.lawws.bussiness.core.TranslatableBussinessObject;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  *
@@ -31,6 +33,17 @@ public class LawWSListBo<Translation, Element extends TranslatableBussinessObjec
             translatedList.add(element.translate());
         }        
         return translatedList;
+    }
+    
+    @Override
+    public String serialize() {
+        String serializedList = "[";
+        for (Element element : elements) {
+            serializedList += element.serialize()+", ";
+        }
+        serializedList += "]";
+        
+        return serializedList.replace(", ]", "]");
     }
          
 }
