@@ -8,15 +8,17 @@ package com.atos.lawws.bussiness.impl;
 import com.atos.lawws.bussiness.core.TranslatableBussinessObject;
 import com.atos.lawws.dtos.impl.RoleDto;
 import com.atos.lawws.dtos.impl.UserDto;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
  * @author a637201
  */
-public class UserBo extends TranslatableBussinessObject<UserDto> {
+public class UserBo extends TranslatableBussinessObject<UserDto> implements UserDetails {
 
     protected Integer id;
     protected String name;
@@ -40,6 +42,7 @@ public class UserBo extends TranslatableBussinessObject<UserDto> {
         this.name = name;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -103,6 +106,42 @@ public class UserBo extends TranslatableBussinessObject<UserDto> {
         UserDto user = translate(new UserDto());
         user.setRoles(new HashSet(roles.translate()));
         return user;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        HashSet<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+        
+        for (RoleBo role : roles.getElements()) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        
+        return authorities;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
     
 }

@@ -7,6 +7,54 @@
 </head>
 <body>
     <div layout:fragment="content">
+        <script th:inline="javascript">
+        /*<![CDATA[*/
+            $(document).ready(function() {
+                $('#cantreordprovtable').DataTable({
+                    'lengthChange': false,
+                    'pageLength': 5,
+                    'info': false,
+                    'filter': false
+                });
+                
+                $('#cantreordvwtable').DataTable({
+                    'lengthChange': false,
+                    'pageLength': 5,
+                    'info': false,
+                    'filter': false
+                });
+                
+                $('#consreordprovtable').DataTable({
+                    'lengthChange': false,
+                    'pageLength': 5,
+                    'info': false,
+                    'filter': false
+                });
+                
+                $('#consreordvwtable').DataTable({
+                    'lengthChange': false,
+                    'pageLength': 5,
+                    'info': false,
+                    'filter': false
+                });
+                
+                $('#fecreordprovtable').DataTable({
+                    'lengthChange': false,
+                    'pageLength': 5,
+                    'info': false,
+                    'filter': false
+                });
+                
+                $('#fecreordvwtable').DataTable({
+                    'lengthChange': false,
+                    'pageLength': 5,
+                    'info': false,
+                    'filter': false
+                });
+                              
+            });
+        /*]]>*/
+        </script>   
         <h2>Mantenimiento de Servicios</h2>
         <br>
         <p>Seleccione el tab segun el servicio que desee testear.</p>
@@ -17,14 +65,14 @@
             <li><a data-toggle="tab" href="#remagr">Remitos Agrupado</a></li>
             <li><a data-toggle="tab" href="#pendval">Pendientes Val</a></li>
             <li><a data-toggle="tab" href="#pendcarg">Pendientes Carga</a></li>
-            <li><a data-toggle="tab" href="#fecreordvw">Fechas Reord VW</a></li>
-            <li><a data-toggle="tab" href="#fecreordprov">Fechas Reord Prov</a></li>
-            <li class="active"><a data-toggle="tab" href="#fecdisp">Fechas Disponibles</a></li>
-            <li><a data-toggle="tab" href="#consreordvw">Consulta Reord VW</a></li>
-            <li><a data-toggle="tab" href="#consreordprov">Consulta Reord Prov</a></li>
+            <li th:class="${fecreordvwact ? 'active' : ''}"><a data-toggle="tab" href="#fecreordvw">Fechas Reord VW</a></li>
+            <li th:class="${fecreordprovact ? 'active' : ''}"><a data-toggle="tab" href="#fecreordprov">Fechas Reord Prov</a></li>
+            <li><a data-toggle="tab" href="#fecdisp">Fechas Disponibles</a></li>
+            <li th:class="${consreordvwact ? 'active' : ''}"><a data-toggle="tab" href="#consreordvw">Consulta Reord VW</a></li>
+            <li th:class="${consreordprovact ? 'active' : ''}"><a data-toggle="tab" href="#consreordprov">Consulta Reord Prov</a></li>
             <li><a data-toggle="tab" href="#consrem">Consulta Remitos</a></li>
-            <li><a data-toggle="tab" href="#cantreordvw">Cantidad Reord VW</a></li>
-            <li><a data-toggle="tab" href="#cantreordprov">Cantidad Reord Prov</a></li>
+            <li th:class="${cantreordvwact ? 'active' : ''}"><a data-toggle="tab" href="#cantreordvw">Cantidad Reord VW</a></li>
+            <li th:class="${cantreordprovact ? 'active' : ''}"><a data-toggle="tab" href="#cantreordprov">Cantidad Reord Prov</a></li>
             <li><a data-toggle="tab" href="#cantrem">Cantidad Remitos</a></li>
             <li><a data-toggle="tab" href="#altaremdef">Alta Rem Def</a></li>
             <li><a data-toggle="tab" href="#actualizaremdef">Actualizacion Rem Def</a></li>
@@ -46,28 +94,28 @@
             <div id="pendcarg" class="tab-pane fade">
                 <h3>Aun no Implementado</h3>
             </div>
-            <div id="fecreordvw" class="tab-pane fade">
+            <div id="fecreordvw" th:class="${fecreordvwact ? 'tab-pane fade in active' : 'tab-pane fade'}">
                 <div th:replace="services/fechasReordersVW :: content"/>
             </div>
-            <div id="fecreordprov" class="tab-pane fade">
+            <div id="fecreordprov" th:class="${fecreordprovact ? 'tab-pane fade in active' : 'tab-pane fade'}">
                 <div th:replace="services/fechasReordersProv :: content"/>
             </div>
-            <div id="fecdisp" class="tab-pane fade in active">
+            <div id="fecdisp" class="tab-pane fade">
                 <h3>Aun no Implementado</h3>
             </div>
-            <div id="consreordvw" class="tab-pane fade">
+            <div id="consreordvw" th:class="${consreordvwact ? 'tab-pane fade in active' : 'tab-pane fade'}">
                 <div th:replace="services/consultaReordersVW :: content"/>
             </div>
-            <div id="consreordprov" class="tab-pane fade">
+            <div id="consreordprov" th:class="${consreordprovact ? 'tab-pane fade in active' : 'tab-pane fade'}">
                 <div th:replace="services/consultaReordersProv :: content"/>
             </div>
             <div id="consrem" class="tab-pane fade">
                 <h3>Aun no Implementado</h3>
             </div>
-            <div id="cantreordvw" class="tab-pane fade">
+            <div id="cantreordvw" th:class="${cantreordvwact ? 'tab-pane fade in active' : 'tab-pane fade'}">
                 <div th:replace="services/cantidadReordersVW :: content"/>
             </div>
-            <div id="cantreordprov" class="tab-pane fade">
+            <div id="cantreordprov" th:class="${cantreordprovact ? 'tab-pane fade in active' : 'tab-pane fade'}">
                 <div th:replace="services/cantidadReordersProv :: content"/>
             </div>
             <div id="cantrem" class="tab-pane fade">

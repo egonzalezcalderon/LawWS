@@ -7,6 +7,18 @@
 </head>
 <body>
     <div layout:fragment="content">
+        <script th:inline="javascript">
+        /*<![CDATA[*/
+            $(document).ready(function() {
+                $('#logTable').DataTable({
+                    'lengthChange': false,
+                    'pageLength': 5,
+                    'info': false,
+                    'filter': false
+                });
+            });
+        /*]]>*/
+        </script>        
         <h2>Log de Servicios</h2>
         <br>
         <p>Seleccione las fechas entre las cuales desea ver las entradas de Log.</p>
@@ -23,7 +35,7 @@
     <br>
     <div class="row">
         <div class="col-sm-12">
-            <table class="table">
+            <table id="logTable" class="table">
                 <thead>
                     <tr>  
                         <th>Servicio Ejecutado</th>

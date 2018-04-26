@@ -25,4 +25,8 @@ public interface LawWSUsersDao extends JpaRepository<UserDto, Integer> {
     public List<UserDto> getUsersWithNameAndDescription(
             @Param("name") String name,
             @Param("description") String description);
+    
+    @Query("select users from UserDto users where users.name = :name")
+    public List<UserDto> getUserWithName(
+            @Param("name") String name);    
 }

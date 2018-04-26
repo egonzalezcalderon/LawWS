@@ -7,7 +7,17 @@
 </head>
 <body>
     <div layout:fragment="content">
-    <script>   
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+        $(document).ready(function() {
+            $('#usersTable').DataTable({
+                'lengthChange': false,
+                'pageLength': 5,
+                'info': false,
+                'filter': false
+            });
+        });
+        
         function abrirDialogoUsuarios(id, nombre, password, descripcion, admRole, mantRole) {
             $('#alterUserId').val(id);
             $('#alterUserName').val(nombre);
@@ -16,7 +26,8 @@
             $('#alterUserAdmRole').prop('checked', admRole);
             $('#alterUserMantRole').prop('checked', mantRole);
         } 
-    </script>        
+    /*]]>*/
+    </script>         
     <h2>Usuarios del Web Service</h2>
     <br>
     <p>Realice una busqueda de los usuarios en el sistema ingresando los parametros de busqueda.</p>
@@ -33,7 +44,7 @@
     <br>
     <div class="row">
         <div class="col-sm-12">
-            <table class="table">
+            <table id="usersTable" class="table">
                 <thead>
                     <tr>  
                         <th>Nombre Usuario</th>

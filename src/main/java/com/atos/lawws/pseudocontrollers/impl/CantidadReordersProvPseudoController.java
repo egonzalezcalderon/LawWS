@@ -30,13 +30,15 @@ public class CantidadReordersProvPseudoController extends PseudoController<Prove
     public void fillControllerParameters(ModelAndView model) {
         model.addObject("inputCantReordProv", new ProveedorBo());
         model.addObject("cantReordProv", new ArrayList<Integer>());
+        model.addObject("cantreordprovact", Boolean.FALSE);
     }
 
     @Override
     public ModelAndView processRequest(ModelAndView modelAndView, ProveedorBo modelAttribute) {
         LawWSListBo<Integer, LawWSInputBo<Integer>> cantidadReorders = cantidadReordersService.serve(modelAttribute);
         modelAndView.addObject("inputCantReordProv", modelAttribute);
-        modelAndView.addObject("cantReordProv", cantidadReorders.translate());
+        modelAndView.addObject("cantReordProv", (cantidadReorders != null)?cantidadReorders.translate():new ArrayList<Integer>());
+        modelAndView.addObject("cantreordprovact", Boolean.TRUE);
         return modelAndView;
     }
     

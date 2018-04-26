@@ -33,6 +33,7 @@ public class FechasReordersVWPseudoController extends PseudoController<Proveedor
     public void fillControllerParameters(ModelAndView model) {
         model.addObject("inputFechasReordVW", new ProveedorBo());
         model.addObject("fechasReordVW", new ArrayList<Date>());
+        model.addObject("fecreordvwact", Boolean.FALSE);
     }
 
     @Override
@@ -46,6 +47,7 @@ public class FechasReordersVWPseudoController extends PseudoController<Proveedor
         
         modelAndView.addObject("inputFechasReordVW", modelAttribute);
         modelAndView.addObject("fechasReordVW", fechas);
+        modelAndView.addObject("fecreordvwact", Boolean.TRUE);
         return modelAndView;
     }
     

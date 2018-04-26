@@ -34,6 +34,7 @@ public class ConsultaReordersVWPseudoController extends PseudoController<Proveed
     public void fillControllerParameters(ModelAndView model) {
         model.addObject("inputConsultaReordVW", new ProveedorBo());
         model.addObject("reordersVW", new ArrayList<ReorderVWBo>());
+        model.addObject("consreordvwact", Boolean.FALSE);
     }
 
     @Override
@@ -41,7 +42,8 @@ public class ConsultaReordersVWPseudoController extends PseudoController<Proveed
         LawWSListBo<ReorderVW, ReorderVWBo> reordersVW = consultaReordersService.serve(modelAttribute);
                
         modelAndView.addObject("inputConsultaReordVW", modelAttribute);
-        modelAndView.addObject("reordersVW", reordersVW.getElements());
+        modelAndView.addObject("reordersVW", (reordersVW != null)? reordersVW.getElements():new ArrayList<ReorderVWBo>());
+        modelAndView.addObject("consreordvwact", Boolean.TRUE);
         return modelAndView;
     }
     

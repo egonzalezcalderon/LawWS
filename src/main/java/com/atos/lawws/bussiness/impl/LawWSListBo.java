@@ -7,6 +7,7 @@ package com.atos.lawws.bussiness.impl;
 
 import com.atos.lawws.bussiness.core.BussinessObject;
 import com.atos.lawws.bussiness.core.TranslatableBussinessObject;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -16,7 +17,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  *
  * @author a637201
  */
-public class LawWSListBo<Translation, Element extends TranslatableBussinessObject<Translation>> extends BussinessObject {
+public class LawWSListBo<Translation, Element extends TranslatableBussinessObject<Translation>> extends BussinessObject implements Serializable{
     List<Element> elements = new ArrayList<Element>();
 
     public List<Element> getElements() {

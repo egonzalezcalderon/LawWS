@@ -8,12 +8,13 @@ package com.atos.lawws.bussiness.impl;
 import com.atos.lawws.bussiness.core.TranslatableBussinessObject;
 import com.atos.lawws.dtos.impl.RoleDto;
 import com.atos.lawws.dtos.impl.UserDto;
+import java.io.Serializable;
 
 /**
  *
  * @author a637201
  */
-public class RoleBo extends TranslatableBussinessObject<RoleDto> {
+public class RoleBo extends TranslatableBussinessObject<RoleDto> implements Serializable{
     
     protected Integer id;
     protected String name;

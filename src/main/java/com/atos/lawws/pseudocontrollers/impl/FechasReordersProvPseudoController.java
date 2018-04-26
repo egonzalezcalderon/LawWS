@@ -34,6 +34,7 @@ public class FechasReordersProvPseudoController extends PseudoController<Proveed
     public void fillControllerParameters(ModelAndView model) {
         model.addObject("inputFechasReordProv", new ProveedorBo());
         model.addObject("fechasReordProv", new ArrayList<Date>());
+        model.addObject("fecreordprovact", Boolean.FALSE);
     }
 
     @Override
@@ -47,6 +48,7 @@ public class FechasReordersProvPseudoController extends PseudoController<Proveed
         
         modelAndView.addObject("inputFechasReordProv", modelAttribute);
         modelAndView.addObject("fechasReordProv", fechas);
+        modelAndView.addObject("fecreordprovact", Boolean.TRUE);
         return modelAndView;
     }
     
