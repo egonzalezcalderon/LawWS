@@ -39,6 +39,8 @@
                 <thead>
                     <tr>  
                         <th>Servicio Ejecutado</th>
+                        <th>Ip Origen</th>
+                        <th>Usuario</th>
                         <th>Solicitud Realizada</th>
                         <th>Fecha Inicio Pedido</th>
                         <th>Fecha Fin Pedido</th>
@@ -48,6 +50,8 @@
               <tbody>
                     <tr th:each="logRecords : ${logRecords}">
                         <td th:text="${logRecords.executedMethod}">-</td>
+                        <td th:text="${logRecords.ipSource}">-</td>
+                        <td th:text="${logRecords.userName}">-</td>
                         <td th:text="${logRecords.requestMade}">-</td>
                         <td th:text="${logRecords.startDate}">-</td>
                         <td th:text="${logRecords.stopDate}">-</td>

@@ -7,11 +7,15 @@ package com.atos.lawws.services.core;
 
 import com.atos.lawws.bussiness.core.BussinessObject;
 import com.atos.lawws.bussiness.impl.LawWSLogRecordBo;
+import com.atos.lawws.bussiness.impl.UserBo;
 import com.atos.lawws.daos.core.LawWSLogDao;
 import java.util.Date;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
 /**
  *
@@ -34,7 +38,18 @@ public abstract class MonitoredService
     protected abstract IntResponse monitoredServe(IntRequest request) throws Exception;
 
     protected LawWSLogRecordBo<IntRequest,IntResponse> logRecord = new LawWSLogRecordBo<IntRequest,IntResponse>();
-        
+    
+    protected String getCurrentUserName() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
+    }
+    
+    protected String getCurrentIpSource() {
+        WebAuthenticationDetails authentication = (WebAuthenticationDetails) 
+                SecurityContextHolder.getContext().getAuthentication().getDetails();
+        return authentication.getRemoteAddress();
+    }
+    
     protected void logServiceExecution() {
         this.logger.info(logRecord.serialize());
         try { 
@@ -51,6 +66,8 @@ public abstract class MonitoredService
         logRecord.setServiceName(getServiceName());
         logRecord.setStartDate(new Date());
         logRecord.setRequest(request);
+        logRecord.setUserName(getCurrentUserName());
+        logRecord.setIpSource(getCurrentIpSource());
         IntResponse response = null;
         
         try {

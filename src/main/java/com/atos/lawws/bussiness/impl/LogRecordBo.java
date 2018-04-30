@@ -18,7 +18,9 @@ public class LogRecordBo extends BussinessObject {
     protected String requestMade;
     protected Date startDate;
     protected Date stopDate;
-    protected String status;    
+    protected String status; 
+    protected String userName;
+    protected String ipSource;
 
     public String getExecutedMethod() {
         return executedMethod;
@@ -59,5 +61,20 @@ public class LogRecordBo extends BussinessObject {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getIpSource() {
+        return ipSource;
+    }
+
+    public void setIpSource(String ipSource) {
+        this.ipSource = ipSource;
+    }    
 }

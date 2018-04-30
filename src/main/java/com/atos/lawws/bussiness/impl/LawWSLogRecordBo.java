@@ -22,6 +22,8 @@ public class LawWSLogRecordBo<IntRequest extends BussinessObject,
     protected IntRequest request;
     protected IntResponse response;
     protected String status;
+    protected String userName;
+    protected String ipSource;    
 
     public IntRequest getRequest() {
         return request;
@@ -70,6 +72,22 @@ public class LawWSLogRecordBo<IntRequest extends BussinessObject,
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getIpSource() {
+        return ipSource;
+    }
+
+    public void setIpSource(String ipSource) {
+        this.ipSource = ipSource;
+    }
     
     public LawWSLogRecordDto getLogRecordDto() {
         LawWSLogRecordDto logRecordDto = new LawWSLogRecordDto();
@@ -78,6 +96,8 @@ public class LawWSLogRecordBo<IntRequest extends BussinessObject,
         logRecordDto.setStartDate(getStartDate());
         logRecordDto.setStopDate(getStopDate());
         logRecordDto.setStatus(getStatus());
+        logRecordDto.setIpSource(getIpSource());
+        logRecordDto.setUserName(getUserName());
         return logRecordDto;
     }
     

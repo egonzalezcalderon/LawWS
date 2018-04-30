@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.atos.lawws.controllers;
+package com.atos.lawws.controllers.impl;
 
 import com.atos.lawws.bussiness.impl.LogRequestBo;
 import com.atos.lawws.bussiness.impl.UserBo;
