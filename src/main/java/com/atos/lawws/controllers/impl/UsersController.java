@@ -5,12 +5,10 @@
  */
 package com.atos.lawws.controllers.impl;
 
-import com.atos.lawws.bussiness.impl.LogRequestBo;
 import com.atos.lawws.bussiness.impl.UserBo;
 import com.atos.lawws.bussiness.impl.UserRequestBo;
+import com.atos.lawws.bussiness.impl.UserResponseBo;
 import com.atos.lawws.services.impl.UserCRUDService;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,67 +22,61 @@ import org.springframework.web.servlet.ModelAndView;
  * @author a637201
  */
 @Controller
-public class UsersController {
+public class UsersController extends LawWSController {
     
     @Autowired
     UserCRUDService userQueryService;
     
-    protected ModelAndView getUsersModelAndView(
-            UserBo searchUser, 
-            List<UserBo> searchUserResult,
-            UserBo newUser) {
-        ModelAndView mav = new ModelAndView("core/users");
+    protected ModelAndView getBaseModelAndView(
+            UserBo searchUser) {
+        ModelAndView mav = getBaseModelAndView("core/users");
         mav.addObject("searchUser", searchUser);
-        mav.addObject("newUser", newUser);
-        mav.addObject("searchUserResult", searchUserResult);
+        mav.addObject("newUser", new UserBo());
+        mav.addObject("searchUserResult", userQueryService.search(new UserRequestBo(searchUser)).getUsers());
         return mav;
-    } 
+    }
+    
+    protected ModelAndView getBaseModelAndView() {
+        ModelAndView mav = getBaseModelAndView("core/users");
+        mav.addObject("searchUser", new UserBo());
+        mav.addObject("newUser", new UserBo());
+        mav.addObject("searchUserResult", userQueryService.search(new UserRequestBo(new UserBo())).getUsers());
+        return mav;
+    }     
     
     @RequestMapping(value="/administration/users", method = RequestMethod.GET)
     public ModelAndView users(Model model) {
-        return getUsersModelAndView(
-                new UserBo(), 
-                new ArrayList<UserBo>(), 
-                new UserBo());
+        return getBaseModelAndView();
     }
     
     @RequestMapping(value="/administration/users", method = RequestMethod.POST)
     public ModelAndView users(@ModelAttribute UserBo userQuery) {
-        return getUsersModelAndView(
-                userQuery, 
-                userQueryService.serve(new UserRequestBo(userQuery, true, false)).getUsers(), 
-                new UserBo());
+        return getBaseModelAndView(userQuery);
     }
     
     @RequestMapping(value="/administration/users/saveuser", method = RequestMethod.GET)
     public ModelAndView saveUser(Model model) {
-        return getUsersModelAndView(
-                new UserBo(), 
-                new ArrayList<UserBo>(), 
-                new UserBo());  
+        return getBaseModelAndView();  
     }
     
     @RequestMapping(value="/administration/users/saveuser", method = RequestMethod.POST)
     public ModelAndView saveUser(@ModelAttribute UserBo user) {
-        return getUsersModelAndView(
-                user, 
-                userQueryService.serve(new UserRequestBo(user, false, false)).getUsers(), 
-                new UserBo());
-    }    
+        UserBo returnedBo = new UserBo();
+        UserResponseBo response = (user.getToBeInserted().equals("no"))?
+                userQueryService.modify(new UserRequestBo(user)):
+                userQueryService.insert(new UserRequestBo(user));
+        returnedBo.setValidationResult(response.isOperationCorrect(), response.getOperationResult());
+        return getBaseModelAndView(returnedBo);
+    }   
     
     @RequestMapping(value="/administration/users/deleteuser", method = RequestMethod.GET)
     public ModelAndView deleteUser(Model model) {
-        return getUsersModelAndView(
-                new UserBo(), 
-                new ArrayList<UserBo>(), 
-                new UserBo());  
+        return getBaseModelAndView();  
     }
     
     @RequestMapping(value="/administration/users/deleteuser", method = RequestMethod.POST)
     public ModelAndView deleteUser(@ModelAttribute UserBo user) {
-        return getUsersModelAndView(
-                user, 
-                userQueryService.serve(new UserRequestBo(user, false, true)).getUsers(), 
-                new UserBo());
+        userQueryService.delete(new UserRequestBo(user));
+        return getBaseModelAndView();
     }        
 }

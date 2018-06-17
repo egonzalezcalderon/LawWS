@@ -15,12 +15,18 @@
         <table id="consreordprovtable" class="table">
             <thead>
                 <tr>  
+                    <th>Codigo Pluma<th/>
+                    <th>Pieza<th/>
                     <th>Cantidad<th/>
+                    <th>Fecha Importacion<th/>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="reorderProv : ${reordersProv}">
-                    <td th:text="${reorderProv.cantidadPiezas}"><td/>
+                    <td th:text="${reorderProv.codPluma}"><td/>
+                    <td th:text="${reorderProv.pieza}"><td/>
+                    <td th:text="${reorderProv.cantidad}"><td/>
+                    <td th:text="${reorderProv.fechaImp}"><td/>
                 </tr>
             </tbody>
          </table>

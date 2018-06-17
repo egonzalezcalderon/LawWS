@@ -5,12 +5,9 @@
  */
 package com.atos.lawws.controllers.impl;
 
-import com.atos.lawws.bussiness.impl.LogRecordBo;
 import com.atos.lawws.bussiness.impl.LogRequestBo;
 import com.atos.lawws.services.impl.LogQueryService;
 import com.atos.lawws.tools.DatesTool;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,13 +21,13 @@ import org.springframework.web.servlet.ModelAndView;
  * @author a637201
  */
 @Controller
-public class LogController {
+public class LogController extends LawWSController {
     
     @Autowired
     LogQueryService logQueryService;
     
     @RequestMapping(value="/maintenance/log", method = RequestMethod.GET)
-    public String queryLog(Model model) {
+    public ModelAndView queryLog(Model model) {
         LogRequestBo logRequest = new LogRequestBo();
         logRequest.setDateFrom(DatesTool.getTodaysDate());
         logRequest.setDateTo(DatesTool.getTomorrowsDate());
@@ -40,12 +37,12 @@ public class LogController {
                         logQueryService.serve(
                                 logQueryService.translateRequest(logRequest))).
                         getLogRecords());
-        return "core/log";
+        return getBaseModelAndView("core/log");
     }
 
     @RequestMapping(value="/maintenance/log", method = RequestMethod.POST)
     public ModelAndView queryLog(@ModelAttribute LogRequestBo logRequest) {
-        ModelAndView mav = new ModelAndView("core/log");
+        ModelAndView mav = getBaseModelAndView("core/log");
         mav.addObject("logRequest", logRequest);
         mav.addObject("logRecords", 
                 logQueryService.translateResponse(

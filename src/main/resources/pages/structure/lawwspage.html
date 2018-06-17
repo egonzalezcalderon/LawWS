@@ -27,10 +27,18 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a th:href="@{/maintenance/log}">Log</a></li>
-                    <li><a th:href="@{/maintenance/services}">Mantenimiento</a></li>
-                    <li><a th:href="@{/administration/users}">Usuarios</a></li>
-                    <li><a th:href="@{/logout}"><i class="glyphicon glyphicon-log-in"></i> Salir</a></li>
+                    <li th:if="${userroles.contains(maintenancerol)}"><a th:href="@{/maintenance/log}">Log</a></li>
+                    <li th:if="${userroles.contains(maintenancerol)}"><a th:href="@{/maintenance/services}">Mantenimiento</a></li>
+                    <li th:if="${userroles.contains(administrationrol)}"><a th:href="@{/administration/users}">Usuarios</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="glyphicon glyphicon-user"></i> <span th:text="${username}"></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a th:href="@{/logout}"><i class="glyphicon glyphicon-log-in"></i> Salir</a>
+                        </div>
+                      </li>
+                    <li></li>
                 </ul>
             </div><!-- /.navbar-collapse -->            
         </div><!-- /.container-fluid -->

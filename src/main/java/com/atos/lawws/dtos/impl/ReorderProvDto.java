@@ -23,7 +23,7 @@ import javax.persistence.StoredProcedureParameter;
 @Entity
 @NamedStoredProcedureQuery(
 	name = "consultaReordersProv", 
-	procedureName = "SP_PROV_REORDER_CANTPROV", 
+	procedureName = "SP_PROV_REORDER_SELPROV", 
 	resultClasses = {ReorderProvDto.class}, 
 	parameters = {     
             @StoredProcedureParameter(name="p_idproveedor", type = String.class, mode = ParameterMode.IN),
@@ -33,21 +33,62 @@ import javax.persistence.StoredProcedureParameter;
 )
 public class ReorderProvDto extends TransformableDto<ReorderProvBo> implements Serializable {
     
-    protected int cantidadPiezas;
-       
+        protected String codPluma;
+    protected String pieza;
+    protected int cantidad;
+    protected Date fechaImportacion;
+
     @Id
-    @Column(name="cantidadpie")
-    public int getCantidadPiezas() {
-        return cantidadPiezas;
+    @Column(name="codpluma")
+    public String getCodPluma() {
+        return codPluma;
     }
 
-    public void setCantidadPiezas(int cantidadPiezas) {
-        this.cantidadPiezas = cantidadPiezas;
-    }   
+    public void setCodPluma(String codPluma) {
+        this.codPluma = codPluma;
+    }
+    
+    @Id
+    @Column(name="pieza")
+    public String getPieza() {
+        return pieza;
+    }
+
+    public void setPieza(String pieza) {
+        this.pieza = pieza;
+    }
+    
+    @Id
+    @Column(name="cantidad")
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
+    @Id
+    @Column(name="fechaimportacion")
+    public Date getFechaImportacion() {
+        return fechaImportacion;
+    }
+
+    public void setFechaImportacion(Date fechaImportacion) {
+        this.fechaImportacion = fechaImportacion;
+    } 
     
     @Override
     public ReorderProvBo translate() {
-        return translate(new ReorderProvBo());
+        ReorderProvBo reorder = translate(new ReorderProvBo());
+        
+        try {
+            reorder.setFechaImp(fechaImportacion);
+        } catch (Exception ex) {
+            reorder.setFechaImp(null);
+        }
+        
+        return reorder;
     }    
 
 }

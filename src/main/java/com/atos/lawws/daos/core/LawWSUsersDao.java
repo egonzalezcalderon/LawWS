@@ -5,9 +5,7 @@
  */
 package com.atos.lawws.daos.core;
 
-import com.atos.lawws.dtos.impl.LawWSLogRecordDto;
 import com.atos.lawws.dtos.impl.UserDto;
-import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

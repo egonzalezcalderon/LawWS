@@ -6,6 +6,7 @@
 package com.atos.lawws.bussiness.impl;
 
 import com.atos.lawws.bussiness.core.BussinessObject;
+import com.atos.lawws.bussiness.core.CRUDResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +14,9 @@ import java.util.List;
  *
  * @author a637201
  */
-public class UserResponseBo extends BussinessObject {
+public class UserResponseBo extends CRUDResponse {
     
     protected List<UserBo> users = new ArrayList<UserBo>();    
-    protected String operationResult = "";
-    protected boolean operationCorrect = false;
     
     public List<UserBo> getUsers() {
         return users;
@@ -25,19 +24,5 @@ public class UserResponseBo extends BussinessObject {
 
     public void setUsers(List<UserBo> users) {
         this.users = users;
-    }
-
-    public String getOperationResult() {
-        return operationResult;
-    }
-
-    public void setOperationResult(boolean operationCorrect, String operationResult) {
-        this.operationResult = operationResult;
-        this.operationCorrect = operationCorrect;
-    }
-
-    public boolean isOperationCorrect() {
-        return operationCorrect;
-    }
-    
+    }    
 }

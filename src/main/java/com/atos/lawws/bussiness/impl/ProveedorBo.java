@@ -22,7 +22,7 @@ public class ProveedorBo extends BussinessObject {
     protected Date fecha;
 
     public ProveedorBo() {
-        this.id = "1";
+        this.id = "Codigo Proveedor";
         this.fecha = new Date();
     }
         

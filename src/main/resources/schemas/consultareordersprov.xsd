@@ -21,7 +21,10 @@
     </xs:element>
     <xs:complexType name="reorderProv">
         <xs:sequence>
-            <xs:element name="cantidadPiezas" type="xs:int"/>
+            <xs:element name="codPluma" type="xs:string"/>
+            <xs:element name="pieza" type="xs:string"/>
+            <xs:element name="cantidad" type="xs:int"/>
+            <xs:element name="fechaImportacion" type="xs:date"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

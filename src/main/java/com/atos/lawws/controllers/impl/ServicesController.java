@@ -25,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author a637201
  */
 @Controller
-public class ServicesController {
+public class ServicesController extends LawWSController {
     
     @Autowired 
     CantidadReordersProvPseudoController cantidadReordersProvPseudoController;
@@ -40,8 +40,8 @@ public class ServicesController {
     @Autowired 
     FechasReordersVWPseudoController fechasReordersVWPseudoController;
       
-    protected ModelAndView getBasicModelAndView() {
-        ModelAndView basicModelAndView = new ModelAndView("core/services");
+    protected ModelAndView getBaseModelAndView() {
+        ModelAndView basicModelAndView = getBaseModelAndView("core/services");
         cantidadReordersProvPseudoController.fillControllerParameters(basicModelAndView);
         cantidadReordersVWPseudoController.fillControllerParameters(basicModelAndView);
         consultaReordersProvPseudoController.fillControllerParameters(basicModelAndView);
@@ -53,67 +53,67 @@ public class ServicesController {
      
     @RequestMapping(value="/maintenance/services", method = RequestMethod.GET)
     public ModelAndView services(Model model) {
-        return getBasicModelAndView();
+        return getBaseModelAndView();
     }   
      
     @RequestMapping(value="/maintenance/services/cantidadreordersprov", method = RequestMethod.GET)
     public ModelAndView cantidadReordersProv(Model model) {
-        return getBasicModelAndView();
+        return getBaseModelAndView();
     }   
     
     @RequestMapping(value="/maintenance/services/cantidadreordersprov", method = RequestMethod.POST)
     public ModelAndView cantidadReordersProv(@ModelAttribute ProveedorBo proveedor) {
-        return cantidadReordersProvPseudoController.processRequest(getBasicModelAndView(), proveedor);
+        return cantidadReordersProvPseudoController.processRequest(getBaseModelAndView(), proveedor);
     }
     
     @RequestMapping(value="/maintenance/services/cantidadreordersvw", method = RequestMethod.GET)
     public ModelAndView cantidadReordersVW(Model model) {
-        return getBasicModelAndView();
+        return getBaseModelAndView();
     }   
     
     @RequestMapping(value="/maintenance/services/cantidadreordersvw", method = RequestMethod.POST)
     public ModelAndView cantidadReordersVW(@ModelAttribute ProveedorBo proveedor) {
-        return cantidadReordersVWPseudoController.processRequest(getBasicModelAndView(), proveedor);
+        return cantidadReordersVWPseudoController.processRequest(getBaseModelAndView(), proveedor);
     }
 
     @RequestMapping(value="/maintenance/services/consultareordersprov", method = RequestMethod.GET)
     public ModelAndView consultaReordersProv(Model model) {
-        return getBasicModelAndView();
+        return getBaseModelAndView();
     }   
     
     @RequestMapping(value="/maintenance/services/consultareordersprov", method = RequestMethod.POST)
     public ModelAndView consultaReordersProv(@ModelAttribute ProveedorBo proveedor) {
-        return consultaReordersProvPseudoController.processRequest(getBasicModelAndView(), proveedor);
+        return consultaReordersProvPseudoController.processRequest(getBaseModelAndView(), proveedor);
     }
 
     @RequestMapping(value="/maintenance/services/consultareordersvw", method = RequestMethod.GET)
     public ModelAndView consultaReordersVW(Model model) {
-        return getBasicModelAndView();
+        return getBaseModelAndView();
     }   
     
     @RequestMapping(value="/maintenance/services/consultareordersvw", method = RequestMethod.POST)
     public ModelAndView consultaReordersVW(@ModelAttribute ProveedorBo proveedor) {
-        return consultaReordersVWPseudoController.processRequest(getBasicModelAndView(), proveedor);
+        return consultaReordersVWPseudoController.processRequest(getBaseModelAndView(), proveedor);
     }
 
     @RequestMapping(value="/maintenance/services/fechasreordersprov", method = RequestMethod.GET)
     public ModelAndView fechasReordersProv(Model model) {
-        return getBasicModelAndView();
+        return getBaseModelAndView();
     }   
     
     @RequestMapping(value="/maintenance/services/fechasreordersprov", method = RequestMethod.POST)
     public ModelAndView fechasReordersProv(@ModelAttribute ProveedorBo proveedor) {
-        return fechasReordersProvPseudoController.processRequest(getBasicModelAndView(), proveedor);
+        return fechasReordersProvPseudoController.processRequest(getBaseModelAndView(), proveedor);
     }    
     
     @RequestMapping(value="/maintenance/services/fechasreordersvw", method = RequestMethod.GET)
     public ModelAndView fechasReordersVW(Model model) {
-        return getBasicModelAndView();
+        return getBaseModelAndView();
     }   
     
     @RequestMapping(value="/maintenance/services/fechasreordersvw", method = RequestMethod.POST)
     public ModelAndView fechasReordersVW(@ModelAttribute ProveedorBo proveedor) {
-        return fechasReordersVWPseudoController.processRequest(getBasicModelAndView(), proveedor);
+        return fechasReordersVWPseudoController.processRequest(getBaseModelAndView(), proveedor);
     }        
     
 }

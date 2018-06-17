@@ -21,10 +21,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class UserBo extends TranslatableBussinessObject<UserDto> implements UserDetails {
 
     protected Integer id;
-    protected String name;
-    protected String password;
-    protected String description;
+    protected String name = "";
+    protected String password = "";
+    protected String description = "";
     protected LawWSListBo<RoleDto, RoleBo> roles = new LawWSListBo<RoleDto, RoleBo>();
+    protected String toBeInserted = "yes";
+    protected Boolean validationErrors = false;
+    protected String validationErrorsValue = "";
     
     public Integer getId() {
         return id;
@@ -66,7 +69,31 @@ public class UserBo extends TranslatableBussinessObject<UserDto> implements User
     public void setRoles(LawWSListBo<RoleDto, RoleBo> roles) {
         this.roles = roles;
     }
-    
+
+    public Boolean getValidationErrors() {
+        return validationErrors;
+    }
+
+    public void setValidationErrors(Boolean validationErrors) {
+        this.validationErrors = validationErrors;
+    }
+
+    public String getValidationErrorsValue() {
+        return validationErrorsValue;
+    }
+
+    public void setValidationErrorsValue(String validationErrorsValue) {
+        this.validationErrorsValue = validationErrorsValue;
+    }
+
+    public String getToBeInserted() {
+        return toBeInserted;
+    }
+
+    public void setToBeInserted(String toBeInserted) {
+        this.toBeInserted = toBeInserted;
+    }
+        
     public Boolean getMantRole() {
         return isRolPresent("MANTENIMIENTO");
     }
@@ -142,6 +169,11 @@ public class UserBo extends TranslatableBussinessObject<UserDto> implements User
     @Override
     public boolean isEnabled() {
         return true;
+    }
+    
+    public void setValidationResult(Boolean validationResult, String validationResultValue) {
+        validationErrors = !validationResult;
+        validationErrorsValue= validationResultValue;
     }
     
 }

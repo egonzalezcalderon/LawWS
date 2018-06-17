@@ -6,7 +6,9 @@
 package com.atos.lawws.bussiness.impl;
 
 import com.atos.lawws.bussiness.core.TranslatableBussinessObject;
+import com.atos.lawws.tools.DatesTool;
 import com.atos.lawws.webservice.xml.consultareordersprov.ReorderProv;
+import java.util.Date;
 
 /**
  *
@@ -14,19 +16,48 @@ import com.atos.lawws.webservice.xml.consultareordersprov.ReorderProv;
  */
 public class ReorderProvBo extends TranslatableBussinessObject<ReorderProv> {
         
-    protected int cantidadPiezas;
+    protected String codPluma;
+    protected String pieza;
+    protected int cantidad;
+    protected Date fechaImp;
 
-    public int getCantidadPiezas() {
-        return cantidadPiezas;
+    public String getCodPluma() {
+        return codPluma;
     }
 
-    public void setCantidadPiezas(int cantidadPiezas) {
-        this.cantidadPiezas = cantidadPiezas;
+    public void setCodPluma(String codPluma) {
+        this.codPluma = codPluma;
+    }
+
+    public String getPieza() {
+        return pieza;
+    }
+
+    public void setPieza(String pieza) {
+        this.pieza = pieza;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Date getFechaImp() {
+        return fechaImp;
+    }
+
+    public void setFechaImp(Date fechaImp) {
+        this.fechaImp = fechaImp;
     }
 
     @Override
     public ReorderProv translate() {
-        return translate(new ReorderProv());
+        ReorderProv reorderProv = translate(new ReorderProv());
+        reorderProv.setFechaImportacion(DatesTool.getXMLGregorianCalendarDate(fechaImp));
+        return reorderProv;
     }
     
 }

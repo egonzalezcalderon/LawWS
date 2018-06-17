@@ -13,6 +13,9 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    public static final String MAINTENANCE_ROL = "MANTENIMIENTO";
+    public static final String ADMINISTRATION_ROL = "ADMINISTRACION";
+    
     @Autowired
     protected AccessDeniedHandler accessDeniedHandler;
 
@@ -28,9 +31,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/bootstrap/**").permitAll()
                 .antMatchers("/images/**").permitAll()
                 .antMatchers("/jquery/**").permitAll()
+                .antMatchers("/jquery_validation/**").permitAll()
                 .antMatchers("/services/**").permitAll()
-                .antMatchers("/maintenance/**").hasAnyAuthority("MANTENIMIENTO")
-                .antMatchers("/administration/**").hasAnyAuthority("ADMINISTRACION")
+                .antMatchers("/maintenance/**").hasAnyAuthority(MAINTENANCE_ROL)
+                .antMatchers("/administration/**").hasAnyAuthority(ADMINISTRATION_ROL)
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()

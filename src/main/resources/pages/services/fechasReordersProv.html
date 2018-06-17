@@ -3,7 +3,6 @@
     <div class="col-sm-12">        
         <form action="#" th:action="@{/maintenance/services/fechasreordersprov}" th:object="${inputFechasReordProv}" method="post">
             Proveedor: <input type="text" th:field="*{id}" />
-            Fecha: <input type="date" th:field="*{fecha}" />
             <input class="btn btn-default" type="submit" value="Ejecutar"/>              
         </form>
     </div>

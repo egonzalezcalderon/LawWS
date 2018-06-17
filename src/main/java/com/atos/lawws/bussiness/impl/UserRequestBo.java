@@ -5,22 +5,18 @@
  */
 package com.atos.lawws.bussiness.impl;
 
-import com.atos.lawws.bussiness.core.BussinessObject;
+import com.atos.lawws.bussiness.core.CRUDRequest;
 
 /**
  *
  * @author a637201
  */
-public class UserRequestBo extends BussinessObject {
+public class UserRequestBo extends CRUDRequest {
     
     protected UserBo user;
-    protected boolean toBeDeleted;
-    protected boolean toBeSearched;
 
-    public UserRequestBo(UserBo user, boolean toBeSearched, boolean toBeDeleted) {
+    public UserRequestBo(UserBo user) {
         this.user = user;
-        this.toBeSearched = toBeSearched;
-        this.toBeDeleted = toBeDeleted;
     }
     
     public UserBo getUser() {
@@ -30,21 +26,4 @@ public class UserRequestBo extends BussinessObject {
     public void setUser(UserBo user) {
         this.user = user;
     }
-    
-    public boolean isToBeDeleted() {
-        return toBeDeleted;
-    }
-
-    public void setToBeDeleted(boolean toBeDeleted) {
-        this.toBeDeleted = toBeDeleted;
-    }
-
-    public boolean isToBeSearched() {
-        return toBeSearched;
-    }
-
-    public void setToBeSearched(boolean toBeSearched) {
-        this.toBeSearched = toBeSearched;
-    }
-    
 }

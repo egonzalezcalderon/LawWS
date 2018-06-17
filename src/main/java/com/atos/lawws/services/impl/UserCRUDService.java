@@ -9,9 +9,11 @@ import com.atos.lawws.bussiness.impl.UserRequestBo;
 import com.atos.lawws.bussiness.impl.UserResponseBo;
 import com.atos.lawws.daos.core.LawWSUsersDao;
 import com.atos.lawws.dtos.impl.UserDto;
-import com.atos.lawws.services.core.SingleTaskService;
+import com.atos.lawws.services.core.CRUDService;
+import com.atos.lawws.tools.SessionTool;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,7 +21,7 @@ import org.springframework.stereotype.Service;
  * @author a637201
  */
 @Service
-public class UserCRUDService implements SingleTaskService<
+public class UserCRUDService extends CRUDService<
         UserRequestBo,
         UserResponseBo,
         UserRequestBo,
@@ -39,20 +41,9 @@ public class UserCRUDService implements SingleTaskService<
     }
 
     @Override
-    public UserResponseBo serve(UserRequestBo request) {
-        if (request.isToBeSearched()) {
-            return searchUser(request);
-        }
-        
-        if (request.isToBeDeleted()) {
-            return deleteUser(request);
-        }
-        
-        return saveUser(request);
-    }
-    
-    protected UserResponseBo searchUser(UserRequestBo request) {
+    protected UserResponseBo internalSearch(UserRequestBo request) {
         UserResponseBo response = new UserResponseBo();
+        SecurityContextHolder.getContext().getAuthentication();
         List<UserDto> foundUsers = lawWSUsersDao.getUsersWithNameAndDescription(request.getUser().getName(), request.getUser().getDescription());
                 
         for (UserDto foundUser : foundUsers) {
@@ -62,7 +53,8 @@ public class UserCRUDService implements SingleTaskService<
         return response;
     }
     
-    protected UserResponseBo deleteUser(UserRequestBo request) {
+    @Override
+    protected UserResponseBo internalDelete(UserRequestBo request) {
         UserResponseBo response = new UserResponseBo();
         try {
             lawWSUsersDao.delete(request.getUser().translate());
@@ -73,14 +65,66 @@ public class UserCRUDService implements SingleTaskService<
         return response;
     }
     
-    protected UserResponseBo saveUser(UserRequestBo request) {
+    @Override
+    protected UserResponseBo internalSave(UserRequestBo request) {
         UserResponseBo response = new UserResponseBo();
         try {
             lawWSUsersDao.save(request.getUser().translate());
-            response.setOperationResult(true, "Usuario Eliminado Correctamente");
+            response.setOperationResult(true, "Usuario Guardado Correctamente");
         } catch (Exception e) {
             response.setOperationResult(false, "Ocurrio un error Guardando el Usuario");
         }
         return response;
+    } 
+
+    @Override
+    protected UserResponseBo isValidToInsert(UserRequestBo request) {
+        UserResponseBo response = new UserResponseBo();
+        
+        String errors = "";
+        
+        if (lawWSUsersDao.getUserWithName(request.getUser().getName()).size() != 0) {
+            errors += "Ya existe un usuario con el nombre ingresado\n";
+        } 
+        
+        errors += validate(request);
+        
+        response.setOperationResult((errors.equals("")), errors);
+        
+        return response;
     }
+    
+    @Override
+    protected UserResponseBo isValidToModify(UserRequestBo request) {
+        UserResponseBo response = new UserResponseBo();
+        
+        String errors = validate(request);
+        
+        response.setOperationResult((errors.equals("")), errors);
+        
+        return response;
+    }    
+    
+    public String validate(UserRequestBo request) {
+        String errors = "";
+        
+        if (request.getUser().getName().trim().length() == 0) {
+            errors += "El Campo Nombre es Obligatorio. ";
+        }
+        
+        if (request.getUser().getPassword().trim().length() == 0) {
+            errors += "El Campo Password es Obligatorio. ";
+        }        
+    
+        if (request.getUser().getDescription().trim().length() == 0) {
+            errors += "El Campo Descripcion es Obligatorio. ";
+        }
+
+        if (request.getUser().getRoles().getElements().size() == 0) {
+            errors += "Se debe Seleccionar por lo menos un Rol. ";
+        }       
+        
+        return errors;
+    }
+    
 }

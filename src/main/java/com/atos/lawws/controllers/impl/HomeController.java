@@ -8,13 +8,14 @@ package com.atos.lawws.controllers.impl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
  * @author A637201
  */
 @Controller
-public class MainController {
+public class HomeController extends LawWSController {
         
 //    @RequestMapping(value="/login", method = RequestMethod.GET)
 //    public String login(Model model) {
@@ -31,23 +32,23 @@ public class MainController {
 //    }  
     
     @RequestMapping(value="/", method = RequestMethod.GET)
-    public String base() {
-        return "core/home";
+    public ModelAndView base() {
+        return getBaseModelAndView("core/home");
     }
     
     @RequestMapping(value="/home", method = RequestMethod.GET)
-    public String home() {
-        return "core/home";
+    public ModelAndView home() {
+        return getBaseModelAndView("core/home");
     }   
     
     @RequestMapping(value="/login", method = RequestMethod.GET)
-    public String login() {
-        return "core/login";
+    public ModelAndView login() {
+        return getBaseModelAndView("core/login");
     }
 
     @RequestMapping(value="/error", method = RequestMethod.GET)
-    public String error() {
-        return "core/error";
+    public ModelAndView error() {
+        return getBaseModelAndView("core/error");
     }
     
 }
